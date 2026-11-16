@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sadjahda (Saku Gadjah Mada) — Optimasi Keuangan & Gaya Hidup | COMMIT 2026</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            surface: '#F8FAFC',
+            card: '#FFFFFF',
+            borderLight: '#E2E8F0',
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+            },
+            safe: {
+              50: '#ECFDF5',
+              100: '#D1FAE5',
+              500: '#10B981',
+              600: '#059669',
+            }
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 1px 3px 0 rgba(15, 23, 42, 0.02)',
+            'hover': '0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.04)',
+            'glow-indigo': '0 8px 20px -4px rgba(79, 70, 229, 0.28)',
+            'glow-emerald': '0 8px 20px -4px rgba(16, 185, 129, 0.28)',
+            'glow-amber': '0 8px 20px -4px rgba(245, 158, 11, 0.28)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      background-color: #F8FAFC;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(153, 27, 27, 0.04) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.05) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: #0F172A;
+      overflow-x: hidden;
+    }
+
+    /* Frosted Glass Header */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    /* Card & Interactive Transitions */
+    .smooth-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 1px 3px 0 rgba(15, 23, 42, 0.02);
+      transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring), border-color 0.25s ease;
+    }
+
+    .smooth-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.07), 0 4px 8px -2px rgba(15, 23, 42, 0.03);
+    }
+
+    .btn-spring {
+      transition: all 0.28s var(--ease-spring);
+    }
+    .btn-spring:active {
+      transform: scale(0.96);
+    }
+
+    /* Tab Content Entrance Animation */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tab-section {
+      display: none;
+      animation: fadeSlideUp 0.45s var(--ease-spring) forwards;
+    }
+
+    .tab-section.active {
+      display: block;
+    }
+
+    /* Number Pulse Effect */
+    @keyframes hudPulse {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.06); background-color: #ECFDF5; border-color: #6EE7B7; }
+      100% { transform: scale(1); }
+    }
+
+    .hud-pulse {
+      animation: hudPulse 0.6s var(--ease-spring);
+    }
+
+    /* Toast Notification Animations */
+    @keyframes toastEnter {
+      from {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+    .toast-item {
+      animation: toastEnter 0.35s var(--ease-spring) forwards;
+    }
+
+    /* Subtle Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+
+    /* Single-Line Auto-Fit Currency Rules (Never break after Rp) */
+    .rp-nowrap {
+      white-space: nowrap !important;
+      display: inline-block;
+      word-break: keep-all;
+      overflow-wrap: normal;
+      line-height: 1.15;
+    }
+
+    .rp-fit {
+      white-space: nowrap !important;
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: clamp(1.15rem, 1.65vw, 1.75rem);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      transform-origin: left center;
+    }
+
+    /* "Si Hemat / Master Cuan" Character Mascot Micro-Animations */
+    @keyframes coinFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-2.5px) rotate(4deg); }
+    }
+    @keyframes tasselSway {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(8deg); }
+    }
+    .sadjahda-logo-wrap:hover .mascot-coin,
+    .master-cuan-card:hover .mascot-coin {
+      animation: coinFloat 1.4s ease-in-out infinite;
+    }
+    .sadjahda-logo-wrap:hover .mascot-tassel,
+    .master-cuan-card:hover .mascot-tassel {
+      animation: tasselSway 1.2s ease-in-out infinite;
+    }
+    .mascot-coin, .mascot-tassel, .mascot-wallet {
+      transition: transform 0.35s var(--ease-spring);
+      transform-origin: center;
+    }
+    .sadjahda-logo-wrap:hover .mascot-wallet {
+      transform: translateY(-1.5px) rotate(-5deg);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-amber-100 selection:text-rose-950">
+
+  <!-- TOAST NOTIFICATION CONTAINER (Top Right) -->
+  <div id="toast-container" class="fixed top-20 right-4 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none px-2 sm:px-0"></div>
+
+  <!-- STICKY FROSTED HEADER -->
+  <header class="glass-nav sticky top-0 z-40 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-3">
+        
+        <!-- Brand Logo: SADJAHDA ("Si Hemat / Master Cuan" Mascot Logo) -->
+        <div class="flex items-center gap-3 min-w-0">
+          <div onclick="openSkorCuanModal()" class="sadjahda-logo-wrap cursor-pointer relative w-12 h-12 sm:w-13 sm:h-13 rounded-2xl bg-gradient-to-br from-amber-400 via-rose-800 to-slate-800 p-0.5 shadow-md hover:shadow-lg transition-all flex-shrink-0 group" title="Si Hemat / Master Cuan — Klik untuk Cek Skor Cuan!">
+            <div class="w-full h-full rounded-[14px] bg-gradient-to-b from-amber-50/95 via-white to-rose-50/90 flex items-center justify-center relative overflow-hidden">
+              <!-- Flat-Design Vector Character Mascot: "Si Hemat / Master Cuan" -->
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11 sm:w-12 sm:h-12">
+                <circle cx="32" cy="34" r="24" fill="#FEF3C7" fill-opacity="0.7"/>
+                <rect x="20" y="53" width="9" height="5" rx="2.5" fill="#FDBA74" stroke="#475569" stroke-width="1.2"/>
+                <rect x="35" y="53" width="9" height="5" rx="2.5" fill="#FDBA74" stroke="#475569" stroke-width="1.2"/>
+                <path d="M18 33C14.5 34 12 38.5 11.5 44C11.2 46.2 13 47.5 15 47C16.5 46.5 17.5 44 18 41.5H46C46.5 44 47.5 46.5 49 47C51 47.5 52.8 46.2 52.5 44C52 38.5 49.5 34 46 33H18Z" fill="#FED7AA" stroke="#334155" stroke-width="1.3"/>
+                <rect x="18" y="31" width="28" height="16" rx="6" fill="#FED7AA" stroke="#334155" stroke-width="1.3"/>
+                <rect x="11.5" y="42" width="5.5" height="2.6" rx="1" transform="rotate(-12 11.5 42)" fill="#F59E0B" stroke="#78350F" stroke-width="0.9"/>
+                <rect x="47" y="41" width="5.5" height="2.6" rx="1" transform="rotate(12 47 41)" fill="#F59E0B" stroke="#78350F" stroke-width="0.9"/>
+                <path d="M18 43H46L47 53.5C47 54.6 46.1 55.5 45 55.5H34.5L32 52.5L29.5 55.5H19C17.9 55.5 17 54.6 17 53.5L18 43Z" fill="#991B1B" stroke="#334155" stroke-width="1.3"/>
+                <path d="M17.5 53.5H29M35 53.5H46.5" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"/>
+                <path d="M18 42.5H46V46H18V42.5Z" fill="#334155" stroke="#1E293B" stroke-width="1.1"/>
+                <path d="M20 32.5C24 36.5 40 36.5 44 32.5" stroke="#F59E0B" stroke-width="3.2" stroke-linecap="round"/>
+                <circle cx="32" cy="36.5" r="3.6" fill="#FBBF24" stroke="#78350F" stroke-width="1.1"/>
+                <circle cx="32" cy="36.5" r="1.4" fill="#991B1B"/>
+                <path d="M21 32.5C25 38 26.5 48 32 50C36.5 51.2 39.5 48.5 40.5 45" stroke="#FBBF24" stroke-width="2.6" stroke-linecap="round"/>
+                <ellipse cx="32" cy="45.5" rx="5" ry="3.8" fill="#F59E0B" stroke="#78350F" stroke-width="1.2"/>
+                <circle cx="32" cy="45.5" r="1.6" fill="#FEF08A"/>
+                <rect x="15.5" y="21" width="3.5" height="6.5" rx="1.7" fill="#FED7AA" stroke="#334155" stroke-width="1.2"/>
+                <rect x="45" y="21" width="3.5" height="6.5" rx="1.7" fill="#FED7AA" stroke="#334155" stroke-width="1.2"/>
+                <rect x="18" y="14" width="28" height="19" rx="7" fill="#FED7AA" stroke="#334155" stroke-width="1.4"/>
+                <path d="M18.5 16H21.5V22.5L18.5 21V16Z" fill="#1E293B"/>
+                <path d="M45.5 16H42.5V22.5L45.5 21V16Z" fill="#1E293B"/>
+                <circle cx="26.2" cy="23.5" r="4.7" fill="#FFFFFF" stroke="#1E293B" stroke-width="1.3"/>
+                <ellipse cx="26.5" cy="23.5" rx="2.1" ry="2.7" fill="#B45309"/>
+                <circle cx="26.5" cy="23.5" r="1.1" fill="#1E293B"/>
+                <circle cx="27.4" cy="22.3" r="0.9" fill="#FFFFFF"/>
+                <circle cx="37.8" cy="23.5" r="4.7" fill="#FFFFFF" stroke="#1E293B" stroke-width="1.3"/>
+                <ellipse cx="37.5" cy="23.5" rx="2.1" ry="2.7" fill="#B45309"/>
+                <circle cx="37.5" cy="23.5" r="1.1" fill="#1E293B"/>
+                <circle cx="38.4" cy="22.3" r="0.9" fill="#FFFFFF"/>
+                <path d="M24 17.5C25.2 16.6 27 16.6 28.2 17.5" stroke="#1E293B" stroke-width="1.3" stroke-linecap="round"/>
+                <path d="M35.8 17.5C37 16.6 38.8 16.6 40 17.5" stroke="#1E293B" stroke-width="1.3" stroke-linecap="round"/>
+                <ellipse cx="32" cy="25.8" rx="1.8" ry="1.1" fill="#FDBA74" stroke="#475569" stroke-width="1"/>
+                <path d="M27.5 28.8C29.5 30.6 34.5 30.6 36.5 28.8" stroke="#334155" stroke-width="1.3" stroke-linecap="round"/>
+                <rect x="19.5" y="11.5" width="25" height="4.5" rx="1.5" fill="#1E293B" stroke="#0F172A" stroke-width="1.2"/>
+                <path d="M9 13L21 6.5H43L55 13L44 14.2H20L9 13Z" fill="#475569" stroke="#1E293B" stroke-width="1.3" stroke-linejoin="round"/>
+                <g class="mascot-tassel">
+                  <path d="M34 9.5L48.5 13.5V21" stroke="#F8FAFC" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M48.5 20.5L46.3 25C46.3 26.5 50.7 26.5 50.7 25L48.5 20.5Z" fill="#FBBF24" stroke="#78350F" stroke-width="1"/>
+                </g>
+                <g class="mascot-wallet">
+                  <rect x="4" y="38" width="11" height="9" rx="2.2" transform="rotate(-10 4 38)" fill="#991B1B" stroke="#450A0A" stroke-width="1.2"/>
+                  <rect x="9.5" y="40" width="4.5" height="3.2" rx="1" transform="rotate(-10 9.5 40)" fill="#FBBF24" stroke="#78350F" stroke-width="0.9"/>
+                </g>
+                <g class="mascot-coin">
+                  <circle cx="52.5" cy="42.5" r="8.5" fill="#FBBF24" stroke="#78350F" stroke-width="1.4"/>
+                  <circle cx="52.5" cy="42.5" r="6.3" fill="#F59E0B" stroke="#FEF08A" stroke-width="1"/>
+                  <text x="52.5" y="45" text-anchor="middle" fill="#78350F" font-family="JetBrains Mono, monospace" font-weight="800" font-size="7.5">Rp</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900">
+                Sad<span class="text-rose-800">jah</span><span class="text-amber-600">da</span>
+              </span>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-amber-50 text-amber-900 border border-amber-300/80 whitespace-nowrap">
+                Saku Gadjah Mada
+              </span>
+            </div>
+            <p class="text-[11px] sm:text-xs text-slate-500 font-medium hidden sm:block truncate">
+              Behavioral Finance & Lifestyle Optimizer • COMMIT 2026
+            </p>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Pills (4 Original Modules) -->
+        <nav class="hidden lg:flex items-center bg-slate-100/90 p-1.5 rounded-2xl border border-slate-200/80" aria-label="Main Navigation">
+          <button onclick="switchTab('tracker')" id="nav-btn-tracker" class="nav-tab-btn btn-spring flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-white text-rose-900 shadow-sm">
+            <i class="ph-bold ph-chart-pie-slice text-base text-rose-800"></i>
+            <span>SakuTracker</span>
+          </button>
+          <button onclick="switchTab('impulse')" id="nav-btn-impulse" class="nav-tab-btn btn-spring flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+            <i class="ph-bold ph-shield-check text-base text-amber-600"></i>
+            <span>Perisai Anti-Kalap</span>
+            <span id="nav-vault-badge" class="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-amber-100 text-amber-900 font-bold">2</span>
+          </button>
+          <button onclick="switchTab('radar')" id="nav-btn-radar" class="nav-tab-btn btn-spring flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+            <i class="ph-bold ph-arrows-clockwise text-base text-indigo-600"></i>
+            <span>Radar Tagihan & Kos</span>
+          </button>
+          <button onclick="switchTab('timewallet')" id="nav-btn-timewallet" class="nav-tab-btn btn-spring flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+            <i class="ph-bold ph-hourglass-high text-base text-emerald-600"></i>
+            <span>Time-Wallet & Habit</span>
+          </button>
+        </nav>
+
+        <!-- Live Mini Financial HUD & Prominent "Atur Ulang Bulan Ini" Control -->
+        <div class="flex items-center gap-2 sm:gap-2.5 flex-shrink-0">
+          <!-- Live Safe Daily Limit Pill -->
+          <div id="header-hud-pill" onclick="openRebudgetModal()" class="cursor-pointer group flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-emerald-50/70 border border-slate-200/90 hover:border-emerald-300 transition-all" title="Klik untuk Atur Ulang Pengeluaran / Kalibrasi Saldo Bulan Ini">
+            <div class="w-2 h-2 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform flex-shrink-0" id="hud-dot"></div>
+            <div class="text-left min-w-0">
+              <div class="text-[10px] uppercase tracking-wider font-semibold text-slate-400 leading-none whitespace-nowrap">Jatah Hari Ini</div>
+              <div id="hud-daily-safe" class="rp-nowrap font-mono font-bold text-xs sm:text-sm text-slate-800 mt-0.5">Rp&nbsp;52.000</div>
+            </div>
+            <i class="ph-bold ph-sliders-horizontal text-slate-400 group-hover:text-rose-800 text-sm hidden sm:inline"></i>
+          </div>
+
+          <!-- Prominent "Atur Ulang Bulan Ini" Button -->
+          <button onclick="openRebudgetModal()" class="btn-spring px-3 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-200/90 text-xs font-extrabold flex items-center gap-1.5 shadow-xs" title="Atur Ulang Pengeluaran Bulan Ini / Nolkan Pengeluaran / Kalibrasi Saldo">
+            <i class="ph-bold ph-arrows-counter-clockwise text-sm text-rose-700"></i>
+            <span class="hidden md:inline">Atur Ulang Bulan Ini</span>
+            <span class="md:hidden">Reset</span>
+          </button>
+
+          <!-- Export CSV Button -->
+          <button onclick="exportReportCSV()" class="btn-spring p-2 sm:px-3 sm:py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-semibold flex items-center gap-1.5 shadow-xs" title="Unduh Laporan Pengeluaran CSV">
+            <i class="ph-bold ph-download-simple text-indigo-600 text-sm"></i>
+            <span class="hidden xl:inline">CSV</span>
+          </button>
+
+          <!-- Info Karya / Guidebook Modal Trigger -->
+          <button onclick="openAboutModal()" class="btn-spring p-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/80 text-xs font-bold flex items-center gap-1" title="Tentang Karya Sadjahda COMMIT 2026">
+            <i class="ph-bold ph-info text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile & Tablet Navigation Bar -->
+      <div class="flex lg:hidden items-center gap-1.5 pb-3 overflow-x-auto no-scrollbar">
+        <button onclick="switchTab('tracker')" id="mob-btn-tracker" class="mob-tab-btn flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-rose-900 text-white shadow-sm">
+          <i class="ph-bold ph-chart-pie-slice"></i>
+          <span>SakuTracker</span>
+        </button>
+        <button onclick="switchTab('impulse')" id="mob-btn-impulse" class="mob-tab-btn flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200">
+          <i class="ph-bold ph-shield-check"></i>
+          <span>Perisai Anti-Kalap</span>
+        </button>
+        <button onclick="switchTab('radar')" id="mob-btn-radar" class="mob-tab-btn flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200">
+          <i class="ph-bold ph-arrows-clockwise"></i>
+          <span>Radar Tagihan Kos</span>
+        </button>
+        <button onclick="switchTab('timewallet')" id="mob-btn-timewallet" class="mob-tab-btn flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200">
+          <i class="ph-bold ph-hourglass-high"></i>
+          <span>Time-Wallet & Habit</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APPLICATION CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- ===================================================================== -->
+    <!-- MODULE 1: SAKUTRACKER & PUSAT KALIBRASI BULAN INI                     -->
+    <!-- ===================================================================== -->
+    <section id="tab-tracker" class="tab-section active space-y-6">
+      
+      <!-- Top Context Banner with Interactive "Si Hemat / Master Cuan" Mascot Companion -->
+      <div class="smooth-card master-cuan-card rounded-3xl p-5 sm:p-6 bg-gradient-to-r from-white via-amber-50/40 to-rose-50/35 border-amber-200/80 relative overflow-hidden">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-10">
+          
+          <!-- Left: Greeting & Mascot Character Badge -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+            <!-- Larger "Si Hemat / Master Cuan" Character Avatar Card -->
+            <div onclick="openSkorCuanModal()" class="cursor-pointer w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-slate-800 via-rose-900 to-amber-600 p-1 shadow-md flex-shrink-0 group relative" title="Klik untuk Analisis Skor Cuan Bersama Si Hemat">
+              <div class="w-full h-full rounded-[20px] bg-gradient-to-b from-amber-50 via-white to-rose-50 flex items-center justify-center relative overflow-hidden">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-18 h-18 sm:w-20 sm:h-20">
+                  <circle cx="32" cy="34" r="25" fill="#FEF3C7" fill-opacity="0.75"/>
+                  <rect x="20" y="53" width="9" height="5" rx="2.5" fill="#FDBA74" stroke="#475569" stroke-width="1.2"/>
+                  <rect x="35" y="53" width="9" height="5" rx="2.5" fill="#FDBA74" stroke="#475569" stroke-width="1.2"/>
+                  <path d="M18 33C14.5 34 12 38.5 11.5 44C11.2 46.2 13 47.5 15 47C16.5 46.5 17.5 44 18 41.5H46C46.5 44 47.5 46.5 49 47C51 47.5 52.8 46.2 52.5 44C52 38.5 49.5 34 46 33H18Z" fill="#FED7AA" stroke="#334155" stroke-width="1.3"/>
+                  <rect x="18" y="31" width="28" height="16" rx="6" fill="#FED7AA" stroke="#334155" stroke-width="1.3"/>
+                  <rect x="11.5" y="42" width="5.5" height="2.6" rx="1" transform="rotate(-12 11.5 42)" fill="#F59E0B" stroke="#78350F" stroke-width="0.9"/>
+                  <rect x="47" y="41" width="5.5" height="2.6" rx="1" transform="rotate(12 47 41)" fill="#F59E0B" stroke="#78350F" stroke-width="0.9"/>
+                  <path d="M18 43H46L47 53.5C47 54.6 46.1 55.5 45 55.5H34.5L32 52.5L29.5 55.5H19C17.9 55.5 17 54.6 17 53.5L18 43Z" fill="#991B1B" stroke="#334155" stroke-width="1.3"/>
+                  <path d="M17.5 53.5H29M35 53.5H46.5" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M18 42.5H46V46H18V42.5Z" fill="#334155" stroke="#1E293B" stroke-width="1.1"/>
+                  <path d="M20 32.5C24 36.5 40 36.5 44 32.5" stroke="#F59E0B" stroke-width="3.2" stroke-linecap="round"/>
+                  <circle cx="32" cy="36.5" r="3.6" fill="#FBBF24" stroke="#78350F" stroke-width="1.1"/>
+                  <circle cx="32" cy="36.5" r="1.4" fill="#991B1B"/>
+                  <path d="M21 32.5C25 38 26.5 48 32 50C36.5 51.2 39.5 48.5 40.5 45" stroke="#FBBF24" stroke-width="2.6" stroke-linecap="round"/>
+                  <ellipse cx="32" cy="45.5" rx="5" ry="3.8" fill="#F59E0B" stroke="#78350F" stroke-width="1.2"/>
+                  <circle cx="32" cy="45.5" r="1.6" fill="#FEF08A"/>
+                  <rect x="15.5" y="21" width="3.5" height="6.5" rx="1.7" fill="#FED7AA" stroke="#334155" stroke-width="1.2"/>
+                  <rect x="45" y="21" width="3.5" height="6.5" rx="1.7" fill="#FED7AA" stroke="#334155" stroke-width="1.2"/>
+                  <rect x="18" y="14" width="28" height="19" rx="7" fill="#FED7AA" stroke="#334155" stroke-width="1.4"/>
+                  <path d="M18.5 16H21.5V22.5L18.5 21V16Z" fill="#1E293B"/>
+                  <path d="M45.5 16H42.5V22.5L45.5 21V16Z" fill="#1E293B"/>
+                  <circle cx="26.2" cy="23.5" r="4.7" fill="#FFFFFF" stroke="#1E293B" stroke-width="1.3"/>
+                  <ellipse cx="26.5" cy="23.5" rx="2.1" ry="2.7" fill="#B45309"/>
+                  <circle cx="26.5" cy="23.5" r="1.1" fill="#1E293B"/>
+                  <circle cx="27.4" cy="22.3" r="0.9" fill="#FFFFFF"/>
+                  <circle cx="37.8" cy="23.5" r="4.7" fill="#FFFFFF" stroke="#1E293B" stroke-width="1.3"/>
+                  <ellipse cx="37.5" cy="23.5" rx="2.1" ry="2.7" fill="#B45309"/>
+                  <circle cx="37.5" cy="23.5" r="1.1" fill="#1E293B"/>
+                  <circle cx="38.4" cy="22.3" r="0.9" fill="#FFFFFF"/>
+                  <path d="M24 17.5C25.2 16.6 27 16.6 28.2 17.5" stroke="#1E293B" stroke-width="1.3" stroke-linecap="round"/>
+                  <path d="M35.8 17.5C37 16.6 38.8 16.6 40 17.5" stroke="#1E293B" stroke-width="1.3" stroke-linecap="round"/>
+                  <ellipse cx="32" cy="25.8" rx="1.8" ry="1.1" fill="#FDBA74" stroke="#475569" stroke-width="1"/>
+                  <path d="M27.5 28.8C29.5 30.6 34.5 30.6 36.5 28.8" stroke="#334155" stroke-width="1.3" stroke-linecap="round"/>
+                  <rect x="19.5" y="11.5" width="25" height="4.5" rx="1.5" fill="#1E293B" stroke="#0F172A" stroke-width="1.2"/>
+                  <path d="M9 13L21 6.5H43L55 13L44 14.2H20L9 13Z" fill="#475569" stroke="#1E293B" stroke-width="1.3" stroke-linejoin="round"/>
+                  <g class="mascot-tassel">
+                    <path d="M34 9.5L48.5 13.5V21" stroke="#F8FAFC" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M48.5 20.5L46.3 25C46.3 26.5 50.7 26.5 50.7 25L48.5 20.5Z" fill="#FBBF24" stroke="#78350F" stroke-width="1"/>
+                  </g>
+                  <g class="mascot-wallet">
+                    <rect x="4" y="38" width="11" height="9" rx="2.2" transform="rotate(-10 4 38)" fill="#991B1B" stroke="#450A0A" stroke-width="1.2"/>
+                    <rect x="9.5" y="40" width="4.5" height="3.2" rx="1" transform="rotate(-10 9.5 40)" fill="#FBBF24" stroke="#78350F" stroke-width="0.9"/>
+                  </g>
+                  <g class="mascot-coin">
+                    <circle cx="52.5" cy="42.5" r="8.5" fill="#FBBF24" stroke="#78350F" stroke-width="1.4"/>
+                    <circle cx="52.5" cy="42.5" r="6.3" fill="#F59E0B" stroke="#FEF08A" stroke-width="1"/>
+                    <text x="52.5" y="45" text-anchor="middle" fill="#78350F" font-family="JetBrains Mono, monospace" font-weight="800" font-size="7.5">Rp</text>
+                  </g>
+                </svg>
+              </div>
+              <span class="absolute -bottom-1.5 -right-1.5 px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-amber-400 text-slate-950 border border-white shadow-xs">
+                SI HEMAT
+              </span>
+            </div>
+
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-100/90 text-amber-950 border border-amber-300/80 text-xs font-bold">
+                  <i class="ph-fill ph-coins text-amber-600"></i>
+                  <span>Master Cuan Behavioral Companion</span>
+                </span>
+                <span id="mascot-mood-pill" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-rose-900 text-amber-200 text-[11px] font-bold">
+                  👑 Kemakmuran & Keberanian Finansial
+                </span>
+              </div>
+              <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Kendalikan Saku, Rem Impulsif, & Optimalkan Gaya Hidup! 👋
+              </h1>
+              <p id="mascot-dynamic-tip" class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
+                <strong>Kata Si Hemat:</strong> "Jatah harianmu hari ini masih aman! Gunakan <em>Perisai Anti-Kalap</em> sebelum checkout belanja online dan cek <em>Radar Tagihan Kos</em> agar uang bulanan tidak bocor halus."
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Action Buttons: Direct "Atur Ulang Bulan Ini" & Skor Cuan -->
+          <div class="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+            <button onclick="openRebudgetModal()" class="btn-spring px-4 py-2.5 rounded-xl bg-rose-900 hover:bg-rose-950 text-amber-200 text-xs font-extrabold flex items-center gap-2 shadow-sm">
+              <i class="ph-bold ph-arrows-counter-clockwise text-base text-amber-400"></i>
+              <span>Atur Ulang Pengeluaran Bulan Ini</span>
+            </button>
+            <button onclick="openSkorCuanModal()" class="btn-spring px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 text-xs font-extrabold flex items-center gap-2 shadow-sm">
+              <i class="ph-fill ph-medal text-base"></i>
+              <span>Rapor Skor Cuan</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Key Financial Metric Cards (With Single-Line Auto-Fit Currency) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        
+        <!-- Card 1: Sisa Saldo Bulan Ini -->
+        <div class="smooth-card rounded-2xl p-5 flex flex-col justify-between min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 truncate">Sisa Saku Bulan Ini</span>
+            <button onclick="openRebudgetModal()" class="text-[11px] font-bold text-rose-800 hover:underline flex items-center gap-1 flex-shrink-0" title="Ubah atau Kalibrasi Saldo">
+              <i class="ph-bold ph-pencil-simple"></i> Ubah
+            </button>
+          </div>
+          <div class="my-3 min-w-0">
+            <div id="metric-remaining" class="rp-fit font-mono font-extrabold text-slate-900">Rp&nbsp;0</div>
+            <div class="flex items-center gap-1.5 mt-1.5 text-xs text-slate-500 min-w-0">
+              <span class="whitespace-nowrap">Anggaran:</span>
+              <span id="metric-budget" class="rp-nowrap font-mono font-semibold text-slate-700">Rp&nbsp;1.800.000</span>
+            </div>
+          </div>
+          <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+            <div id="bar-monthly-remaining" class="bg-rose-800 h-full rounded-full transition-all duration-700" style="width: 65%"></div>
+          </div>
+        </div>
+
+        <!-- Card 2: Jatah Harian Aman (Dynamic Engine) -->
+        <div class="smooth-card rounded-2xl p-5 flex flex-col justify-between border-emerald-200/90 bg-gradient-to-b from-white to-emerald-50/20 min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 truncate">Jatah Harian Aman</span>
+            <span id="badge-safety-status" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 whitespace-nowrap flex-shrink-0">
+              Aman Terkendali
+            </span>
+          </div>
+          <div class="my-3 min-w-0">
+            <div id="metric-daily-safe" class="rp-fit font-mono font-extrabold text-emerald-600">Rp&nbsp;0</div>
+            <p class="text-xs text-slate-500 mt-1.5 truncate">
+              Untuk <span id="metric-days-left" class="font-mono font-bold text-slate-700">15</span> hari tersisa bulan ini
+            </p>
+          </div>
+          <div class="text-[11px] text-slate-500 flex items-center justify-between pt-2 border-t border-slate-100">
+            <span class="truncate">Otomatis menyesuaikan sisa saku</span>
+            <i class="ph-fill ph-check-circle text-emerald-500 text-sm flex-shrink-0"></i>
+          </div>
+        </div>
+
+        <!-- Card 3: Pengeluaran Hari Ini vs Limit -->
+        <div class="smooth-card rounded-2xl p-5 flex flex-col justify-between min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 truncate">Terpakai Hari Ini</span>
+            <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0">
+              <i class="ph-bold ph-flame text-base"></i>
+            </div>
+          </div>
+          <div class="my-3 min-w-0">
+            <div id="metric-spent-today" class="rp-fit font-mono font-extrabold text-slate-900">Rp&nbsp;0</div>
+            <div id="metric-today-diff" class="text-xs font-medium text-emerald-600 mt-1.5 truncate">
+              Masih hemat Rp&nbsp;0 hari ini
+            </div>
+          </div>
+          <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+            <div id="bar-today-spent" class="bg-emerald-500 h-full rounded-full transition-all duration-700" style="width: 35%"></div>
+          </div>
+        </div>
+
+        <!-- Card 4: Total Pengeluaran Bulan Ini + Quick Reset -->
+        <div class="smooth-card rounded-2xl p-5 flex flex-col justify-between min-w-0">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 truncate">Total Keluar Bulan Ini</span>
+            <button onclick="clearMonthlyExpensesNow()" class="px-2 py-0.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-[10px] font-extrabold transition-colors flex items-center gap-1 flex-shrink-0" title="Nolkan Pengeluaran Bulan Ini ke Rp 0">
+              <i class="ph-bold ph-trash"></i> Nolkan
+            </button>
+          </div>
+          <div class="my-3 min-w-0">
+            <div id="metric-total-spent" class="rp-fit font-mono font-extrabold text-slate-900">Rp&nbsp;0</div>
+            <div class="flex items-center gap-1.5 mt-1.5 text-xs text-emerald-600 font-medium min-w-0">
+              <i class="ph-bold ph-shield-star flex-shrink-0"></i>
+              <span class="whitespace-nowrap">Diselamatkan Anti-Kalap:</span>
+              <span id="metric-saved-impulse" class="rp-nowrap font-mono font-bold">Rp&nbsp;0</span>
+            </div>
+          </div>
+          <div class="text-[11px] text-slate-500 flex items-center justify-between pt-2 border-t border-slate-100">
+            <span id="metric-tx-count" class="truncate">0 transaksi tercatat</span>
+            <button onclick="openRebudgetModal()" class="font-bold text-indigo-600 hover:underline whitespace-nowrap">Atur Ulang →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Main Grid: Left (Quick Logger + Form) & Right (Category Analytics + History) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT COLUMN (5 Cols): 1-Tap Logger + Custom Transaction Form -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- 1-Second Quick Preset Chips -->
+          <div class="smooth-card rounded-3xl p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center">
+                  <i class="ph-fill ph-lightning text-sm"></i>
+                </div>
+                <h2 class="font-bold text-sm sm:text-base text-slate-900">Catat Cepat 1-Detik</h2>
+              </div>
+              <span class="text-[11px] font-medium text-slate-400">1-Klik Masuk Saku</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-4">
+              Catat pengeluaran harian mahasiswa tanpa ribet mengetik satu per satu:
+            </p>
+            <div class="grid grid-cols-2 gap-2.5">
+              <button onclick="quickLogExpense('Makan Harian Mahasiswa', 12000, 'Makan & Minum', 'QRIS')" class="btn-spring text-left p-2.5 rounded-xl border border-slate-200 hover:border-rose-300 hover:bg-rose-50/30 transition-all group">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">🍛</span>
+                  <span class="rp-nowrap font-mono text-[11px] font-bold text-rose-800 bg-rose-50 px-1.5 py-0.5 rounded">Rp&nbsp;12rb</span>
+                </div>
+                <div class="text-xs font-bold text-slate-800 mt-1 group-hover:text-rose-900 truncate">Makan Harian</div>
+              </button>
+
+              <button onclick="quickLogExpense('Kopi Fokus Nugas', 13000, 'Makan & Minum', 'QRIS')" class="btn-spring text-left p-2.5 rounded-xl border border-slate-200 hover:border-rose-300 hover:bg-rose-50/30 transition-all group">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">☕</span>
+                  <span class="rp-nowrap font-mono text-[11px] font-bold text-rose-800 bg-rose-50 px-1.5 py-0.5 rounded">Rp&nbsp;13rb</span>
+                </div>
+                <div class="text-xs font-bold text-slate-800 mt-1 group-hover:text-rose-900 truncate">Kopi Fokus Nugas</div>
+              </button>
+
+              <button onclick="quickLogExpense('Isi Bensin / Transport Kampus', 20000, 'Transport', 'Tunai')" class="btn-spring text-left p-2.5 rounded-xl border border-slate-200 hover:border-rose-300 hover:bg-rose-50/30 transition-all group">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">🛵</span>
+                  <span class="rp-nowrap font-mono text-[11px] font-bold text-rose-800 bg-rose-50 px-1.5 py-0.5 rounded">Rp&nbsp;20rb</span>
+                </div>
+                <div class="text-xs font-bold text-slate-800 mt-1 group-hover:text-rose-900 truncate">Bensin / Transport</div>
+              </button>
+
+              <button onclick="quickLogExpense('Kebutuhan Akademik & Cloud', 10000, 'Akademik & Produktivitas', 'QRIS')" class="btn-spring text-left p-2.5 rounded-xl border border-slate-200 hover:border-rose-300 hover:bg-rose-50/30 transition-all group">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">📚</span>
+                  <span class="rp-nowrap font-mono text-[11px] font-bold text-rose-800 bg-rose-50 px-1.5 py-0.5 rounded">Rp&nbsp;10rb</span>
+                </div>
+                <div class="text-xs font-bold text-slate-800 mt-1 group-hover:text-rose-900 truncate">Kebutuhan Kuliah</div>
+              </button>
+
+              <button onclick="quickLogExpense('Laundry & Kebutuhan Kos', 18000, 'Tagihan & Kos', 'QRIS')" class="btn-spring text-left p-2.5 rounded-xl border border-slate-200 hover:border-rose-300 hover:bg-rose-50/30 transition-all group">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">🧺</span>
+                  <span class="rp-nowrap font-mono text-[11px] font-bold text-rose-800 bg-rose-50 px-1.5 py-0.5 rounded">Rp&nbsp;18rb</span>
+                </div>
+                <div class="text-xs font-bold text-slate-800 mt-1 group-hover:text-rose-900 truncate">Laundry & Kos</div>
+              </button>
+
+              <button onclick="quickLogExpense('Honor Asisten / Proyek Lepas', 150000, 'Pemasukan', 'Transfer', 'income')" class="btn-spring text-left p-2.5 rounded-xl border border-emerald-200 bg-emerald-50/30 hover:bg-emerald-50 transition-all group">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">💸</span>
+                  <span class="rp-nowrap font-mono text-[11px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded">+Rp&nbsp;150rb</span>
+                </div>
+                <div class="text-xs font-bold text-emerald-900 mt-1 truncate">Bonus / Pemasukan</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Custom Transaction Form -->
+          <div class="smooth-card rounded-3xl p-5 sm:p-6">
+            <h2 class="font-bold text-base text-slate-900 mb-4 flex items-center gap-2">
+              <i class="ph-bold ph-plus-circle text-rose-800 text-lg"></i>
+              <span>Tambah Transaksi Baru</span>
+            </h2>
+
+            <form id="tx-form" onsubmit="handleAddTransaction(event)" class="space-y-4">
+              <!-- Type Switcher -->
+              <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl">
+                <button type="button" id="type-btn-expense" onclick="setTxType('expense')" class="py-2 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-sm">
+                  Pengeluaran (-)
+                </button>
+                <button type="button" id="type-btn-income" onclick="setTxType('income')" class="py-2 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                  Pemasukan (+)
+                </button>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">Nama Transaksi</label>
+                <input type="text" id="tx-title" required placeholder="Contoh: Makan Malam atau Iuran Kegiatan" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-rose-700 focus:ring-3 focus:ring-rose-100 transition-all" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">Nominal (Rp)</label>
+                  <input type="number" id="tx-amount" required min="500" step="500" placeholder="15000" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 font-mono text-xs sm:text-sm focus:outline-none focus:border-rose-700 focus:ring-3 focus:ring-rose-100 transition-all" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">Metode Bayar</label>
+                  <select id="tx-method" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm bg-white focus:outline-none focus:border-rose-700">
+                    <option value="QRIS">QRIS</option>
+                    <option value="Tunai">Uang Tunai</option>
+                    <option value="Transfer">Transfer / E-Wallet</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">Kategori</label>
+                <select id="tx-category" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm bg-white focus:outline-none focus:border-rose-700">
+                  <option value="Makan & Minum">🍛 Makan & Minum</option>
+                  <option value="Tagihan & Kos">🏠 Tagihan, Langganan & Kos</option>
+                  <option value="Akademik & Produktivitas">📚 Akademik & Produktivitas</option>
+                  <option value="Transport">🛵 Transport & Mobilitas</option>
+                  <option value="Gaya Hidup & Hiburan">🎮 Gaya Hidup & Hiburan</option>
+                  <option value="Pemasukan">💰 Kiriman / Pemasukan Ekstra</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-spring w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 font-bold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2">
+                <i class="ph-bold ph-check-circle text-base"></i>
+                <span>Simpan Transaksi ke Sadjahda</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (7 Cols): Category Breakdown & Interactive History with Reset Controls -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Category Distribution Bar & Pills -->
+          <div class="smooth-card rounded-3xl p-5 sm:p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+              <div>
+                <h2 class="font-bold text-base text-slate-900">Proporsi Pengeluaran per Kategori</h2>
+                <p class="text-xs text-slate-500">Pantau pos pengeluaran terbesar agar tidak melebihi batas aman</p>
+              </div>
+              <span id="top-category-badge" class="self-start sm:self-auto px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-900 border border-amber-200">
+                Terbesar: Makan & Minum
+              </span>
+            </div>
+
+            <!-- Multi-Segment Stacked Progress Bar -->
+            <div id="category-stacked-bar" class="w-full h-3.5 rounded-full bg-slate-100 overflow-hidden flex gap-0.5 p-0.5 mb-5"></div>
+
+            <!-- Category Breakdown Grid -->
+            <div id="category-breakdown-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+          </div>
+
+          <!-- Filterable Transaction History with Direct Reset/Clear Toolbar -->
+          <div class="smooth-card rounded-3xl p-5 sm:p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-100">
+              <div>
+                <h2 class="font-bold text-base text-slate-900">Riwayat Transaksi Bulan Ini</h2>
+                <p class="text-xs text-slate-500">Klik tombol di samping jika ingin mengosongkan atau mengatur ulang pengeluaran bulan ini</p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="clearMonthlyExpensesNow()" class="btn-spring px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold flex items-center gap-1.5">
+                  <i class="ph-bold ph-trash"></i>
+                  <span>Kosongkan Bulan Ini (Rp&nbsp;0)</span>
+                </button>
+                <button onclick="openRebudgetModal()" class="btn-spring px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1.5">
+                  <i class="ph-bold ph-sliders-horizontal"></i>
+                  <span>Kalibrasi Saldo</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Search & Category Filter -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-4">
+              <div class="relative flex-1">
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="filter-search" oninput="renderTracker()" placeholder="Cari transaksi..." class="w-full pl-8 pr-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-rose-700" />
+              </div>
+              <select id="filter-category" onchange="renderTracker()" class="px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-none focus:border-rose-700 font-semibold">
+                <option value="ALL">Semua Kategori</option>
+                <option value="Makan & Minum">Makan & Minum</option>
+                <option value="Tagihan & Kos">Tagihan & Kos</option>
+                <option value="Akademik & Produktivitas">Akademik & Produktivitas</option>
+                <option value="Transport">Transport</option>
+                <option value="Gaya Hidup & Hiburan">Gaya Hidup & Hiburan</option>
+                <option value="Pemasukan">Pemasukan</option>
+              </select>
+            </div>
+
+            <!-- Transaction List Container -->
+            <div id="tx-list-container" class="space-y-2.5 max-h-[400px] overflow-y-auto pr-1"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- MODULE 2: PERISAI ANTI-KALAP (IMPULSE SHIELD & COOLING-OFF VAULT)     -->
+    <!-- ===================================================================== -->
+    <section id="tab-impulse" class="tab-section space-y-6">
+      
+      <!-- Banner -->
+      <div class="smooth-card rounded-3xl p-5 sm:p-6 bg-gradient-to-r from-white via-amber-50/50 to-rose-50/40 border-amber-200/80">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold mb-2">
+              <i class="ph-bold ph-shield-check"></i>
+              <span>Behavioral Finance • Filter Belanja Impulsif Mahasiswa</span>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+              Perisai Anti-Kalap & Brankas Tunda 48 Jam
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+              Tergoda *checkout* barang diskon tengah malam, *top-up game*, atau nongkrong mahal karena FOMO? Uji dulu nilainya terhadap **Jatah Harian Amanmu**, lalu tahan 48 jam di Brankas Tunda sebelum memutuskan beli!
+            </p>
+          </div>
+
+          <!-- Total Saved Counter Badge -->
+          <div class="p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 flex items-center gap-3 flex-shrink-0">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-sm">
+              <i class="ph-bold ph-piggy-bank text-2xl"></i>
+            </div>
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-800">Total Cuan Terselamatkan</div>
+              <div id="impulse-total-saved" class="rp-nowrap font-mono text-lg sm:text-xl font-extrabold text-emerald-700">Rp&nbsp;185.000</div>
+              <div class="text-[10px] text-emerald-600 font-semibold">Dari batal belanja impulsif bulan ini</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Grid: Left (Real-Value Converter & Risk Simulator) & Right (48-Hour Cooling-Off Vault) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT (6 Cols): Impulse Real-Value Converter -->
+        <div class="lg:col-span-6 space-y-5">
+          <div class="smooth-card rounded-3xl p-5 sm:p-6 space-y-5">
+            <div class="flex items-center justify-between">
+              <h2 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+                <i class="ph-bold ph-scales text-rose-800 text-xl"></i>
+                <span>Kalkulator Sadar Diri (Uji Barang Impian)</span>
+              </h2>
+              <button onclick="loadSampleImpulseItem()" class="text-xs font-bold text-rose-800 hover:underline">Contoh Godaan</button>
+            </div>
+
+            <div class="space-y-3.5">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Barang / Pengeluaran yang Ingin Dibeli</label>
+                <input type="text" id="imp-name" value="Mechanical Keyboard Keycaps RGB / Jaket Kampus" oninput="evaluateImpulseItem()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-rose-700" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Harga Barang (Rp)</label>
+                  <input type="number" id="imp-price" value="165000" min="5000" step="5000" oninput="evaluateImpulseItem()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 font-mono text-xs sm:text-sm font-bold focus:outline-none focus:border-rose-700" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Pemicu Keinginan Saat Ini</label>
+                  <select id="imp-trigger" onchange="evaluateImpulseItem()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm bg-white focus:outline-none focus:border-rose-700">
+                    <option value="FOMO">🔥 FOMO / Ikut-ikutan Teman</option>
+                    <option value="FLASH_SALE">⚡ Diskon / Flash Sale Tengah Malam</option>
+                    <option value="STRESS">😫 Stres Tugas / Butuh Dopamin Sesaat</option>
+                    <option value="PRODUCTIVE">🎓 Menunjang Kuliah / Produktivitas</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="text-xs font-bold text-slate-700">Seberapa Mendesak Digunakan Minggu Ini?</label>
+                  <span id="imp-urgency-label" class="text-xs font-bold text-amber-700">Skor Urgensi: 4/10 (Bisa Ditunda)</span>
+                </div>
+                <input type="range" id="imp-urgency" min="1" max="10" value="4" oninput="evaluateImpulseItem()" class="w-full accent-rose-800 cursor-pointer" />
+              </div>
+            </div>
+
+            <!-- Real-World Student Equivalent Reality Check Cards -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                Konversi Nilai Nyata Kehidupan Mahasiswa:
+              </div>
+              <div class="grid grid-cols-3 gap-2.5 text-center">
+                <div class="p-3 rounded-xl bg-white border border-slate-200/80">
+                  <div class="text-lg">🗓️</div>
+                  <div id="eq-days-safe" class="font-mono font-extrabold text-sm sm:text-base text-rose-800 mt-0.5">3.2 Hari</div>
+                  <div class="text-[10px] text-slate-500 font-medium">Jatah Harian Amanmu</div>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-slate-200/80">
+                  <div class="text-lg">🍛</div>
+                  <div id="eq-meals" class="font-mono font-extrabold text-sm sm:text-base text-amber-700 mt-0.5">14 Porsi</div>
+                  <div class="text-[10px] text-slate-500 font-medium">Makan Kenyang (@12rb)</div>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-slate-200/80">
+                  <div class="text-lg">💻</div>
+                  <div id="eq-work-hours" class="font-mono font-extrabold text-sm sm:text-base text-indigo-700 mt-0.5">6.6 Jam</div>
+                  <div class="text-[10px] text-slate-500 font-medium">Kerja Asisten (@25rb/jam)</div>
+                </div>
+              </div>
+
+              <!-- Verdict Banner -->
+              <div id="imp-verdict-box" class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-950 leading-relaxed font-medium">
+                🚨 <strong>Peringatan Kalap Tinggi (Skor 82/100):</strong> Barang ini menghabiskan lebih dari 3 hari jatah hidupmu dan dipicu oleh FOMO. Sangat disarankan masuk <strong>Brankas Tunda 48 Jam</strong> dulu!
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <button onclick="lockItemIntoVault()" class="btn-spring py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-glow-amber">
+                <i class="ph-bold ph-lock-key text-base"></i>
+                <span>Tahan di Brankas 48 Jam</span>
+              </button>
+              <button onclick="cancelImpulseDirectSave()" class="btn-spring py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-glow-emerald">
+                <i class="ph-bold ph-shield-check text-base"></i>
+                <span>Batal Beli! Simpan Cuan</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT (6 Cols): 48-Hour Cooling-Off Vault List -->
+        <div class="lg:col-span-6 space-y-5">
+          <div class="smooth-card rounded-3xl p-5 sm:p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+                  <i class="ph-bold ph-vault text-amber-600 text-xl"></i>
+                  <span>Brankas Tunda 48 Jam (Cooling-Off Vault)</span>
+                </h2>
+                <p class="text-xs text-slate-500">
+                  80% keinginan impulsif hilang setelah ditunda 48 jam. Coret barang di bawah untuk menambah skor penghematanmu!
+                </p>
+              </div>
+            </div>
+
+            <div id="vault-items-container" class="space-y-3"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- MODULE 3: RADAR LANGGANAN & TAGIHAN KOS (SUBSCRIPTION LEAK DETECTOR)  -->
+    <!-- ===================================================================== -->
+    <section id="tab-radar" class="tab-section space-y-6">
+      
+      <!-- Header Banner -->
+      <div class="smooth-card rounded-3xl p-5 sm:p-6 bg-gradient-to-r from-white via-indigo-50/40 to-amber-50/30">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold mb-2">
+              <i class="ph-bold ph-radar"></i>
+              <span>Recurring Expense Audit • Detektor Kebocoran Halus</span>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+              Radar Tagihan Kos & Optimasi Langganan Digital
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+              Tagihan kecil seperti langganan aplikasi hiburan, cloud storage, listrik token, dan Wi-Fi kos sering menguras saldo tanpa terasa. Pantau jatuh tempo dan aktifkan **Mode Patungan Family/Kos** untuk memangkas biaya hingga 60%!
+            </p>
+          </div>
+          <button onclick="openAddSubModal()" class="btn-spring self-start md:self-auto px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 text-xs font-bold flex items-center gap-2 shadow-sm">
+            <i class="ph-bold ph-plus-circle text-base"></i>
+            <span>Tambah Tagihan Rutin</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 Metric Cards for Subscriptions -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="smooth-card rounded-2xl p-5 min-w-0">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Beban Rutin / Bulan</div>
+          <div id="sub-monthly-total" class="rp-fit font-mono font-extrabold text-slate-900 my-2">Rp&nbsp;0</div>
+          <div class="text-xs text-slate-500">Setara <span id="sub-yearly-total" class="rp-nowrap font-mono font-bold text-rose-700">Rp&nbsp;0</span> / tahun</div>
+        </div>
+
+        <div class="smooth-card rounded-2xl p-5 border-amber-200 bg-amber-50/20 min-w-0">
+          <div class="text-xs font-bold uppercase tracking-wider text-amber-800">Potensi Penghematan Patungan</div>
+          <div id="sub-potential-save" class="rp-fit font-mono font-extrabold text-amber-600 my-2">Rp&nbsp;0</div>
+          <div class="text-xs text-slate-600">Jika langganan solo diubah ke paket bersama</div>
+        </div>
+
+        <div class="smooth-card rounded-2xl p-5 border-emerald-200 bg-emerald-50/20 min-w-0">
+          <div class="text-xs font-bold uppercase tracking-wider text-emerald-800">Status Kebocoran Halus</div>
+          <div id="sub-leak-count" class="font-extrabold text-lg sm:text-xl text-emerald-700 my-2">2 Layanan Bisa Dihemat</div>
+          <div class="text-xs text-slate-600">Klik tombol <em>"Ubah ke Patungan"</em> pada kartu di bawah</div>
+        </div>
+      </div>
+
+      <!-- Subscriptions & Kos Bills Grid -->
+      <div id="subs-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- MODULE 4: TIME-WALLET & HABIT OPTIMIZER (JEDA KULIAH & GAYA HIDUP)    -->
+    <!-- ===================================================================== -->
+    <section id="tab-timewallet" class="tab-section space-y-6">
+      
+      <!-- Banner -->
+      <div class="smooth-card rounded-3xl p-5 sm:p-6 bg-gradient-to-r from-white via-emerald-50/40 to-amber-50/30">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-2">
+              <i class="ph-bold ph-hourglass-high"></i>
+              <span>Lifestyle & Time Optimization • Waktu adalah Uang</span>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+              Time-Wallet & Simulator Kebiasaan Mahasiswa
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+              Kebiasaan sehari-hari seperti cara mengisi jeda kuliah 3 jam, jam tidur, dan mobilitas sangat menentukan kesehatan dompetmu. Aktifkan kebiasaan cerdas di bawah dan lihat berapa banyak uang & waktu yang kamu menangkan setiap bulan!
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-900 text-white flex items-center gap-3 flex-shrink-0">
+            <div class="w-11 h-11 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold">
+              <i class="ph-bold ph-trend-up text-2xl"></i>
+            </div>
+            <div>
+              <div class="text-[10px] uppercase tracking-wider text-amber-300 font-bold">Estimasi Penghematan Gaya Hidup</div>
+              <div id="habit-monthly-saved" class="rp-nowrap font-mono text-lg sm:text-xl font-extrabold text-white">Rp&nbsp;340.000<span class="text-xs font-normal text-slate-300">/bln</span></div>
+              <div id="habit-time-saved" class="text-[11px] text-emerald-400 font-semibold">+18 Jam Fokus Produktif / bulan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Grid: Left (Habit Swapper 7 Cols) & Right (Daily Time-Wallet Block Planner 5 Cols) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT (7 Cols): Interactive Student Habit Swapper -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="smooth-card rounded-3xl p-5 sm:p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="font-extrabold text-base sm:text-lg text-slate-900">Audit & Konversi Kebiasaan Harian</h2>
+                <p class="text-xs text-slate-500">Geser sakelar ke mode <strong>Gaya Hidup Optimal</strong> untuk melihat dampaknya terhadap tabungan semestermu</p>
+              </div>
+            </div>
+
+            <div id="habit-swapper-list" class="space-y-3"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT (5 Cols): Smart Daily Routine & Energy-Cost Planner -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="smooth-card rounded-3xl p-5 sm:p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+                  <i class="ph-bold ph-calendar-check text-emerald-600 text-xl"></i>
+                  <span>Perencana Blok Waktu & Dompet Harian</span>
+                </h2>
+                <p class="text-xs text-slate-500">Rancang alokasi waktu harianmu agar hemat energi dan bebas pengeluaran darurat</p>
+              </div>
+            </div>
+
+            <!-- Add Routine Block Form -->
+            <form onsubmit="handleAddRoutineBlock(event)" class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+              <div class="grid grid-cols-3 gap-2">
+                <input type="text" id="routine-time" required placeholder="10:00 - 12:30" class="px-2.5 py-2 rounded-xl border border-slate-200 font-mono text-xs bg-white focus:outline-none focus:border-emerald-600" />
+                <input type="text" id="routine-activity" required placeholder="Belajar Mandiri di Perpus" class="col-span-2 px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-none focus:border-emerald-600" />
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="routine-type" class="px-2.5 py-2 rounded-xl border border-slate-200 text-xs bg-white">
+                  <option value="Fokus Gratis (Rp 0)">📚 Fokus Gratis (Rp 0)</option>
+                  <option value="Hemat Terencana">🍱 Hemat Terencana</option>
+                  <option value="Olahraga & Istirahat">🏃 Olahraga & Istirahat</option>
+                </select>
+                <button type="submit" class="btn-spring py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1">
+                  <i class="ph-bold ph-plus"></i> Tambah Blok
+                </button>
+              </div>
+            </form>
+
+            <!-- Routine Timeline Container -->
+            <div id="routine-blocks-container" class="space-y-2.5"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-12 border-t border-slate-200/80 bg-white/70 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-800">Sadjahda (Saku Gadjah Mada) v2.0</span>
+        <span>•</span>
+        <span>Karya Orisinal Kompetisi Web Design <strong class="text-rose-800">COMMIT 2026</strong> — Ilmu Komputer UGM</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <button onclick="openRebudgetModal()" class="hover:text-rose-800 font-bold transition-colors">Atur Ulang Bulan Ini</button>
+        <span>•</span>
+        <button onclick="openAboutModal()" class="hover:text-indigo-600 font-semibold transition-colors">Dokumentasi & Inovasi</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODALS (NO ALERT/CONFIRM USED ANYWHERE)                               -->
+  <!-- ===================================================================== -->
+
+  <!-- 1. PROMINENT "ATUR ULANG PENGELUARAN BULAN INI / RE-BUDGET" MODAL -->
+  <div id="modal-rebudget" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/45 backdrop-blur-xs p-4">
+    <div class="smooth-card rounded-3xl max-w-lg w-full p-6 space-y-5 animate-[fadeSlideUp_0.25s_ease-out] border-rose-200 max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-rose-900 text-amber-300 flex items-center justify-center">
+            <i class="ph-bold ph-arrows-counter-clockwise text-lg"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900">Atur Ulang Pengeluaran Bulan Ini</h3>
+            <p class="text-xs text-slate-500">Pilih cara reset atau kalibrasi anggaran yang paling sesuai</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-rebudget')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
+          <i class="ph-bold ph-x text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Quick Action 1: Nolkan Pengeluaran Bulan Ini (Mulai dari Rp 0) -->
+      <div class="p-4 rounded-2xl bg-rose-50/70 border border-rose-200 space-y-2.5">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <div class="font-extrabold text-xs sm:text-sm text-rose-950 flex items-center gap-1.5">
+              <i class="ph-fill ph-broom text-rose-700"></i>
+              <span>Opsi 1: Kosongkan / Nolkan Pengeluaran Bulan Ini</span>
+            </div>
+            <p class="text-xs text-rose-900/80 mt-0.5 leading-relaxed">
+              Menghapus seluruh daftar transaksi bulan ini sehingga <strong>Total Pengeluaran kembali Rp&nbsp;0</strong> dan saldo utuh kembali dari awal bulan.
+            </p>
+          </div>
+        </div>
+        <button type="button" onclick="clearMonthlyExpensesNow()" class="btn-spring w-full py-2.5 px-4 rounded-xl bg-rose-700 hover:bg-rose-800 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-sm">
+          <i class="ph-bold ph-trash text-sm"></i>
+          <span>Nolkan Pengeluaran Bulan Ini Sekarang (Rp&nbsp;0)</span>
+        </button>
+      </div>
+
+      <!-- Quick Action 2: Kalibrasi Saldo & Target Bulanan -->
+      <form onsubmit="saveRebudgetSettings(event)" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-3.5">
+        <div class="font-extrabold text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
+          <i class="ph-fill ph-sliders-horizontal text-indigo-600"></i>
+          <span>Opsi 2: Ubah Target Anggaran & Sisa Hari Bulan Ini</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Target Anggaran Bulanan (Rp)</label>
+            <input type="number" id="input-monthly-budget" required min="100000" step="50000" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 font-mono text-xs sm:text-sm font-bold bg-white focus:outline-none focus:border-rose-700" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Sisa Hari Bulan Ini</label>
+            <input type="number" id="input-days-remaining" required min="1" max="31" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 font-mono text-xs sm:text-sm font-bold bg-white focus:outline-none focus:border-rose-700" />
+          </div>
+        </div>
+
+        <div class="pt-1">
+          <label class="block text-xs font-bold text-emerald-800 mb-1">
+            Atau Masukkan Sisa Uang Nyata di Dompet/M-Banking Saat Ini (Opsional):
+          </label>
+          <input type="number" id="input-actual-remaining" min="0" step="10000" placeholder="Kosongkan jika hanya ingin ubah target bulanan" class="w-full px-3.5 py-2 rounded-xl border border-emerald-300 font-mono text-xs sm:text-sm bg-white focus:outline-none focus:border-emerald-600" />
+          <p class="text-[11px] text-slate-500 mt-1">
+            Jika diisi, Sadjahda akan mereset riwayat lama dan menyesuaikan saldo sisa menjadi persis angka ini.
+          </p>
+        </div>
+
+        <button type="submit" class="btn-spring w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 text-xs font-extrabold flex items-center justify-center gap-2">
+          <i class="ph-bold ph-check-circle text-sm"></i>
+          <span>Simpan Kalibrasi Anggaran</span>
+        </button>
+      </form>
+
+      <!-- Quick Action 3: Restore Demo Dataset -->
+      <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+        <span class="text-slate-500">Ingin kembali ke dataset simulasi awal untuk demo juri?</span>
+        <button type="button" onclick="confirmResetDemoData()" class="font-extrabold text-indigo-600 hover:underline flex items-center gap-1">
+          <i class="ph-bold ph-arrow-counter-clockwise"></i> Pulihkan Data Demo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Add Recurring Subscription / Kos Bill Modal -->
+  <div id="modal-add-sub" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 backdrop-blur-xs p-4">
+    <div class="smooth-card rounded-3xl max-w-md w-full p-6 space-y-4 animate-[fadeSlideUp_0.25s_ease-out]">
+      <div class="flex items-center justify-between">
+        <h3 class="font-extrabold text-lg text-slate-900">Tambah Tagihan / Langganan Rutin</h3>
+        <button onclick="closeModal('modal-add-sub')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
+          <i class="ph-bold ph-x text-lg"></i>
+        </button>
+      </div>
+      <form onsubmit="handleAddSubscription(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Nama Tagihan / Layanan</label>
+          <input type="text" id="new-sub-name" required placeholder="Contoh: iCloud Storage 50GB / Iuran Sampah Kos" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-indigo-500" />
+        </div>
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Biaya Bulanan (Rp)</label>
+            <input type="number" id="new-sub-cost" required min="1000" step="1000" placeholder="45000" class="w-full px-3 py-2 rounded-xl border border-slate-200 font-mono text-xs focus:outline-none focus:border-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Jatuh Tempo Setiap Tanggal</label>
+            <input type="number" id="new-sub-day" required min="1" max="31" placeholder="25" class="w-full px-3 py-2 rounded-xl border border-slate-200 font-mono text-xs focus:outline-none focus:border-indigo-500" />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Kategori</label>
+            <select id="new-sub-cat" class="w-full px-2.5 py-2 rounded-xl border border-slate-200 text-xs bg-white">
+              <option value="Utilitas Kos">🏠 Utilitas Kos</option>
+              <option value="Produktivitas & AI">💻 Produktivitas & AI</option>
+              <option value="Hiburan Digital">🎬 Hiburan Digital</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Bisa Patungan?</label>
+            <select id="new-sub-shareable" class="w-full px-2.5 py-2 rounded-xl border border-slate-200 text-xs bg-white">
+              <option value="yes">Bisa Patungan (Hemat 50%)</option>
+              <option value="no">Tagihan Pribadi</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('modal-add-sub')" class="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600">Batal</button>
+          <button type="submit" class="btn-spring px-5 py-2 rounded-xl bg-slate-900 text-amber-300 text-xs font-bold">Simpan ke Radar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Judge Guide & COMMIT 2026 Overview Modal -->
+  <div id="modal-about" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 backdrop-blur-xs p-4">
+    <div class="smooth-card rounded-3xl max-w-2xl w-full p-6 sm:p-7 space-y-5 animate-[fadeSlideUp_0.25s_ease-out] max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-rose-900 text-amber-300 flex items-center justify-center font-bold">
+            <i class="ph-bold ph-trophy text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-lg text-slate-900">Sadjahda (Saku Gadjah Mada) — Karya Orisinal COMMIT 2026</h3>
+            <p class="text-xs text-slate-500">Tema: Optimasi Keuangan dan Gaya Hidup • Ilmu Komputer UGM 2026</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-about')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
+          <i class="ph-bold ph-x text-lg"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+        <p>
+          <strong class="text-slate-900">Sadjahda (Saku Gadjah Mada)</strong> mengangkat permasalahan baru di luar studi kasus contoh guidebook, yaitu <strong>Behavioral Finance (Psikologi Keuangan), Kebocoran Langganan Halus, dan Konversi Waktu-Dompet Mahasiswa</strong>:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <div class="font-bold text-slate-900 flex items-center gap-1.5 mb-1">
+              <i class="ph-fill ph-check-circle text-rose-800"></i>
+              <span>1. SakuTracker & Re-Budget Instan</span>
+            </div>
+            <p class="text-xs text-slate-500">Menghitung otomatis Jatah Harian Aman dengan fitur <strong>Atur Ulang / Kalibrasi Saldo Bulan Ini</strong> kapan saja.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <div class="font-bold text-slate-900 flex items-center gap-1.5 mb-1">
+              <i class="ph-fill ph-check-circle text-amber-600"></i>
+              <span>2. Perisai Anti-Kalap & Brankas 48 Jam</span>
+            </div>
+            <p class="text-xs text-slate-500">Mengonversi harga barang incaran ke jumlah hari hidup, porsi makan, & jam kerja asisten sebelum ditahan 48 jam.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <div class="font-bold text-slate-900 flex items-center gap-1.5 mb-1">
+              <i class="ph-fill ph-check-circle text-indigo-600"></i>
+              <span>3. Radar Tagihan Kos & Langganan</span>
+            </div>
+            <p class="text-xs text-slate-500">Mendeteksi kebocoran tagihan bulanan/tahunan (listrik, Wi-Fi, cloud, streaming) dengan 1-klik optimasi patungan.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <div class="font-bold text-slate-900 flex items-center gap-1.5 mb-1">
+              <i class="ph-fill ph-check-circle text-emerald-600"></i>
+              <span>4. Time-Wallet & Habit Optimizer</span>
+            </div>
+            <p class="text-xs text-slate-500">Mengukur dampak finansial dari kebiasaan mengisi jeda kuliah, jam tidur, & perencanaan blok waktu harian.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button onclick="closeModal('modal-about')" class="btn-spring px-5 py-2.5 rounded-xl bg-slate-900 text-amber-300 text-xs font-bold">Tutup Panduan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. "Si Hemat / Master Cuan" Financial Score & Character Philosophy Modal -->
+  <div id="modal-skor-cuan" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 backdrop-blur-xs p-4">
+    <div class="smooth-card rounded-3xl max-w-lg w-full p-6 space-y-5 animate-[fadeSlideUp_0.25s_ease-out] border-amber-300">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-1 rounded-xl bg-amber-100 text-amber-900 font-extrabold text-xs">👑 MASTER CUAN</span>
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900">Rapor Finansial Si Hemat</h3>
+        </div>
+        <button onclick="closeModal('modal-skor-cuan')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
+          <i class="ph-bold ph-x text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-50 via-white to-rose-50 border border-amber-200/80 flex items-center gap-4">
+        <div class="w-16 h-16 rounded-2xl bg-slate-900 text-amber-400 flex flex-col items-center justify-center font-mono flex-shrink-0 shadow-sm">
+          <span class="text-[10px] uppercase font-bold text-amber-200">Skor</span>
+          <span id="skor-cuan-value" class="text-2xl font-extrabold">92</span>
+        </div>
+        <div>
+          <div id="skor-cuan-title" class="font-extrabold text-sm sm:text-base text-rose-950">Gelar: Master Cuan Bulaksumur!</div>
+          <p id="skor-cuan-desc" class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+            Pengeluaran harianmu terkendali di bawah batas aman dan kamu aktif menahan belanja impulsif!
+          </p>
+        </div>
+      </div>
+
+      <!-- Philosophy of "Si Hemat / Master Cuan" Rebranding -->
+      <div class="space-y-2.5 text-xs text-slate-600 bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
+        <div class="font-bold text-slate-900 flex items-center gap-1.5">
+          <i class="ph-fill ph-sparkle text-amber-600"></i>
+          <span>Filosofi Karakter "Si Hemat / Master Cuan":</span>
+        </div>
+        <ul class="space-y-1.5">
+          <li class="flex items-start gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+            <span><strong class="text-slate-800">Emas Kemakmuran (Gold Coin & Kalung Adat):</strong> Melambangkan literasi finansial, tabungan masa depan, dan kemakmuran mahasiswa.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-800 mt-1 flex-shrink-0"></span>
+            <span><strong class="text-slate-800">Merah Marun Keberanian (Busana & Dompet Saku):</strong> Melambangkan keberanian mengatur prioritas keuangan dan disiplin menahan belanja impulsif.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-slate-800 mt-1 flex-shrink-0"></span>
+            <span><strong class="text-slate-800">Abu-Abu Gelap Akademik (Toga & Sabuk):</strong> Menjaga asosiasi kuat dengan identitas intelektual mahasiswa kampus UGM.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex justify-end gap-2">
+        <button onclick="closeModal('modal-skor-cuan')" class="btn-spring px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 text-xs font-bold">
+          Siap Lanjutkan Hemat!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- APPLICATION JAVASCRIPT ENGINE                                         -->
+  <!-- ===================================================================== -->
+  <script>
+    const STORAGE_KEY = 'SADJAHDA_COMMIT2026_ORIGINAL_V2';
+
+    // Category Color & Icon Mapping
+    const CATEGORY_META = {
+      'Makan & Minum': { color: '#991B1B', bg: 'bg-rose-50', text: 'text-rose-800', bar: 'bg-rose-800', icon: 'ph-fork-knife' },
+      'Tagihan & Kos': { color: '#0EA5E9', bg: 'bg-sky-50', text: 'text-sky-700', bar: 'bg-sky-500', icon: 'ph-house-line' },
+      'Akademik & Produktivitas': { color: '#F59E0B', bg: 'bg-amber-50', text: 'text-amber-800', bar: 'bg-amber-500', icon: 'ph-books' },
+      'Transport': { color: '#6366F1', bg: 'bg-indigo-50', text: 'text-indigo-700', bar: 'bg-indigo-500', icon: 'ph-moped' },
+      'Gaya Hidup & Hiburan': { color: '#8B5CF6', bg: 'bg-violet-50', text: 'text-violet-700', bar: 'bg-violet-500', icon: 'ph-game-controller' },
+      'Pemasukan': { color: '#10B981', bg: 'bg-emerald-50', text: 'text-emerald-700', bar: 'bg-emerald-500', icon: 'ph-trend-up' }
+    };
+
+    function getDefaultState() {
+      return {
+        monthlyBudget: 1800000,
+        daysRemaining: 15,
+        txTypeDraft: 'expense',
+        impulseSavedTotal: 185000,
+        transactions: [
+          { id: 'tx-1', title: 'Sarapan Pagi & Air Mineral', amount: 12000, category: 'Makan & Minum', method: 'QRIS', type: 'expense', date: 'Hari Ini, 07:45', isToday: true },
+          { id: 'tx-2', title: 'Fotokopi & Referensi Praktikum', amount: 8000, category: 'Akademik & Produktivitas', method: 'QRIS', type: 'expense', date: 'Hari Ini, 09:30', isToday: true },
+          { id: 'tx-3', title: 'Iuran Token Listrik & Wi-Fi Kos Bulanan', amount: 125000, category: 'Tagihan & Kos', method: 'Transfer', type: 'expense', date: '14 Nov 2026', isToday: false },
+          { id: 'tx-4', title: 'Makan Siang & Malam Harian', amount: 24000, category: 'Makan & Minum', method: 'QRIS', type: 'expense', date: '14 Nov 2026', isToday: false },
+          { id: 'tx-5', title: 'Isi Bensin Motor Seminggu', amount: 35000, category: 'Transport', method: 'Tunai', type: 'expense', date: '12 Nov 2026', isToday: false },
+          { id: 'tx-6', title: 'Laundry Pakaian Kos 4 Kg', amount: 22000, category: 'Tagihan & Kos', method: 'QRIS', type: 'expense', date: '10 Nov 2026', isToday: false },
+          { id: 'tx-7', title: 'Olahraga Futsal & Minum Angkatan', amount: 35000, category: 'Gaya Hidup & Hiburan', method: 'QRIS', type: 'expense', date: '08 Nov 2026', isToday: false },
+          { id: 'tx-8', title: 'Honor Asisten Praktikum / Proyek', amount: 200000, category: 'Pemasukan', method: 'Transfer', type: 'income', date: '05 Nov 2026', isToday: false }
+        ],
+        vaultItems: [
+          {
+            id: 'v1',
+            name: 'Sneakers Running Diskon 11.11 Marketplace',
+            price: 275000,
+            trigger: 'FLASH_SALE',
+            createdAt: 'Ditahan 18 jam lalu • Sisa 30 jam',
+            eqDays: '5.3 Hari Jatah Hidup'
+          },
+          {
+            id: 'v2',
+            name: 'Voucher Top-Up Skin Game Battlepass',
+            price: 85000,
+            trigger: 'FOMO',
+            createdAt: 'Ditahan 36 jam lalu • Sisa 12 jam',
+            eqDays: '1.6 Hari Jatah Hidup'
+          }
+        ],
+        subscriptions: [
+          { id: 's1', name: 'Patungan Wi-Fi Fiber Kos (100 Mbps)', cost: 65000, dueDay: 20, category: 'Utilitas Kos', isShared: true, canShare: true },
+          { id: 's2', name: 'Token Listrik Kamar Kos', cost: 80000, dueDay: 25, category: 'Utilitas Kos', isShared: false, canShare: false },
+          { id: 's3', name: 'Spotify Premium (Masih Paket Individual)', cost: 54990, dueDay: 18, category: 'Hiburan Digital', isShared: false, canShare: true },
+          { id: 's4', name: 'Cloud Storage & Tools Produktivitas Kuliah', cost: 45000, dueDay: 28, category: 'Produktivitas & AI', isShared: false, canShare: true },
+          { id: 's5', name: 'Paket Data Internet Seluler Bulanan', cost: 60000, dueDay: 22, category: 'Utilitas Kos', isShared: false, canShare: false },
+          { id: 's6', name: 'Streaming Film / OTT Bulanan Solo', cost: 65000, dueDay: 19, category: 'Hiburan Digital', isShared: false, canShare: true }
+        ],
+        habits: [
+          {
+            id: 'h1',
+            title: 'Mengisi Jeda Kuliah 3 Jam (3x Seminggu)',
+            badLabel: 'Nongkrong di kafe ber-AC (@Rp 28.000)',
+            goodLabel: 'Co-working Perpustakaan Kampus / GIK + Bawa Tumbler (@Rp 5.000)',
+            monthlySave: 276000,
+            timeGainHours: 8,
+            optimized: true
+          },
+          {
+            id: 'h2',
+            title: 'Kebiasaan Jam Tidur & Lapar Tengah Malam',
+            badLabel: 'Begadang & pesan makanan online jam 23.30 + ongkir (2x/minggu)',
+            goodLabel: 'Tidur pukul 22.30 & sedia camilan sehat di kamar kos',
+            monthlySave: 160000,
+            timeGainHours: 10,
+            optimized: true
+          },
+          {
+            id: 'h3',
+            title: 'Air Minum Selama Kuliah Seharian',
+            badLabel: 'Beli botol air kemasan/minuman manis 2x sehari (@Rp 10.000)',
+            goodLabel: 'Bawa Tumbler isi ulang dari galon kos & water station kampus',
+            monthlySave: 220000,
+            timeGainHours: 2,
+            optimized: false
+          },
+          {
+            id: 'h4',
+            title: 'Manajemen Waktu Berangkat Kuliah Pagi',
+            badLabel: 'Bangun mepet & terpaksa pesan ojol tarif sibuk/hujan',
+            goodLabel: 'Siapkan perlengkapan malam hari & berangkat 15 menit lebih awal',
+            monthlySave: 120000,
+            timeGainHours: 4,
+            optimized: false
+          }
+        ],
+        routineBlocks: [
+          { id: 'r1', time: '07:15 - 09:45', activity: 'Kuliah Algoritma & Struktur Data + Bawa Tumbler', type: 'Fokus Gratis (Rp 0)' },
+          { id: 'r2', time: '10:00 - 12:00', activity: 'Deep Work Tugas Pemrograman di Perpustakaan', type: 'Fokus Gratis (Rp 0)' },
+          { id: 'r3', time: '12:00 - 13:00', activity: 'Makan Siang Terencana (Batas Aman Rp 15.000)', type: 'Hemat Terencana' },
+          { id: 'r4', time: '16:30 - 17:30', activity: 'Jogging Sore Lembah UGM / Olahraga Kampus', type: 'Olahraga & Istirahat' }
+        ]
+      };
+    }
+
+    let appState = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return getDefaultState();
+        const parsed = JSON.parse(raw);
+        return { ...getDefaultState(), ...parsed };
+      } catch (err) {
+        return getDefaultState();
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (err) {
+        console.error('Failed saving state:', err);
+      }
+    }
+
+    // Format Currency IDR with Non-Breaking Space (\u00A0) so "Rp" and digits NEVER split onto two lines
+    function formatRupiah(num) {
+      const clean = Math.round(Number(num) || 0);
+      return 'Rp\u00A0' + clean.toLocaleString('id-ID');
+    }
+
+    // Dynamic Auto-Fit Helper for .rp-fit elements
+    function fitCurrencyElements() {
+      const elements = document.querySelectorAll('.rp-fit');
+      elements.forEach(el => {
+        el.style.fontSize = '';
+        const parent = el.parentElement;
+        if (!parent) return;
+        const availableWidth = parent.clientWidth;
+        if (availableWidth <= 0) return;
+
+        let currentSize = parseFloat(window.getComputedStyle(el).fontSize);
+        while (el.scrollWidth > availableWidth && currentSize > 13) {
+          currentSize -= 1;
+          el.style.fontSize = currentSize + 'px';
+        }
+      });
+    }
+
+    function animateCurrency(el, targetValue) {
+      if (!el) return;
+      const currentRaw = el.getAttribute('data-val') ? Number(el.getAttribute('data-val')) : 0;
+      const target = Math.round(Number(targetValue) || 0);
+      el.setAttribute('data-val', target);
+
+      if (Math.abs(target - currentRaw) < 10) {
+        el.textContent = formatRupiah(target);
+        fitCurrencyElements();
+        return;
+      }
+
+      const duration = 380;
+      const startTime = performance.now();
+
+      function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(currentRaw + (target - currentRaw) * eased);
+        el.textContent = formatRupiah(current);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = formatRupiah(target);
+          fitCurrencyElements();
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    function showToast(title, subtitle = '', type = 'success') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const styles = {
+        success: { border: 'border-emerald-200', iconBg: 'bg-emerald-100 text-emerald-600', icon: 'ph-check-circle' },
+        indigo: { border: 'border-indigo-200', iconBg: 'bg-indigo-100 text-indigo-600', icon: 'ph-sparkle' },
+        warning: { border: 'border-amber-200', iconBg: 'bg-amber-100 text-amber-700', icon: 'ph-shield-warning' },
+        danger: { border: 'border-rose-200', iconBg: 'bg-rose-100 text-rose-600', icon: 'ph-trash' }
+      }[type] || { border: 'border-emerald-200', iconBg: 'bg-emerald-100 text-emerald-600', icon: 'ph-check-circle' };
+
+      const toast = document.createElement('div');
+      toast.className = `toast-item pointer-events-auto bg-white/95 backdrop-blur-md border ${styles.border} rounded-2xl p-3.5 shadow-hover flex items-start gap-3`;
+      toast.innerHTML = `
+        <div class="w-8 h-8 rounded-xl ${styles.iconBg} flex items-center justify-center flex-shrink-0 mt-0.5">
+          <i class="ph-bold ${styles.icon} text-lg"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-xs font-extrabold text-slate-900">${title}</div>
+          ${subtitle ? `<div class="text-[11px] text-slate-500 mt-0.5 leading-snug">${subtitle}</div>` : ''}
+        </div>
+      `;
+
+      container.appendChild(toast);
+
+      const hudPill = document.getElementById('header-hud-pill');
+      if (hudPill) {
+        hudPill.classList.remove('hud-pulse');
+        void hudPill.offsetWidth;
+        hudPill.classList.add('hud-pulse');
+      }
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(20px)';
+        toast.style.transition = 'all 0.25s ease';
+        setTimeout(() => toast.remove(), 260);
+      }, 3400);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+      const targetSec = document.getElementById(`tab-${tabId}`);
+      if (targetSec) targetSec.classList.add('active');
+
+      ['tracker', 'impulse', 'radar', 'timewallet'].forEach(id => {
+        const dBtn = document.getElementById(`nav-btn-${id}`);
+        const mBtn = document.getElementById(`mob-btn-${id}`);
+        if (dBtn) {
+          dBtn.className = id === tabId
+            ? 'nav-tab-btn btn-spring flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-white text-rose-900 shadow-sm'
+            : 'nav-tab-btn btn-spring flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:text-slate-900';
+        }
+        if (mBtn) {
+          mBtn.className = id === tabId
+            ? 'mob-tab-btn flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-rose-900 text-white shadow-sm'
+            : 'mob-tab-btn flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200';
+        }
+      });
+
+      fitCurrencyElements();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================================
+    // MODULE 1: SAKUTRACKER & RE-BUDGET / RESET PENGELUARAN BULAN INI
+    // =========================================================================
+    function calculateFinancialMetrics() {
+      let totalSpent = 0;
+      let totalIncome = 0;
+      let spentToday = 0;
+      const byCategory = {};
+
+      appState.transactions.forEach(tx => {
+        const amt = Number(tx.amount) || 0;
+        if (tx.type === 'income') {
+          totalIncome += amt;
+        } else {
+          totalSpent += amt;
+          if (tx.isToday) spentToday += amt;
+          byCategory[tx.category] = (byCategory[tx.category] || 0) + amt;
+        }
+      });
+
+      const effectiveBudget = Number(appState.monthlyBudget) + totalIncome;
+      const remaining = Math.max(0, effectiveBudget - totalSpent);
+      const daysLeft = Math.max(1, Number(appState.daysRemaining) || 15);
+      
+      const balanceStartOfToday = remaining + spentToday;
+      const dailySafeLimit = Math.round(balanceStartOfToday / daysLeft);
+      const remainingTodayAllowance = dailySafeLimit - spentToday;
+
+      return {
+        totalSpent,
+        totalIncome,
+        spentToday,
+        effectiveBudget,
+        remaining,
+        daysLeft,
+        dailySafeLimit,
+        remainingTodayAllowance,
+        byCategory
+      };
+    }
+
+    function renderTracker() {
+      const m = calculateFinancialMetrics();
+
+      animateCurrency(document.getElementById('metric-remaining'), m.remaining);
+      document.getElementById('metric-budget').textContent = formatRupiah(appState.monthlyBudget);
+      animateCurrency(document.getElementById('metric-daily-safe'), m.dailySafeLimit);
+      document.getElementById('metric-days-left').textContent = m.daysLeft;
+      animateCurrency(document.getElementById('metric-spent-today'), m.spentToday);
+      animateCurrency(document.getElementById('metric-total-spent'), m.totalSpent);
+      document.getElementById('metric-saved-impulse').textContent = formatRupiah(appState.impulseSavedTotal);
+      document.getElementById('metric-tx-count').textContent = `${appState.transactions.length} transaksi tercatat`;
+
+      const hudDailyEl = document.getElementById('hud-daily-safe');
+      const hudDot = document.getElementById('hud-dot');
+      if (hudDailyEl) {
+        hudDailyEl.textContent = formatRupiah(Math.max(0, m.remainingTodayAllowance));
+      }
+
+      const remPct = m.effectiveBudget > 0 ? Math.min(100, Math.max(4, Math.round((m.remaining / m.effectiveBudget) * 100))) : 0;
+      document.getElementById('bar-monthly-remaining').style.width = `${remPct}%`;
+
+      const todayPct = m.dailySafeLimit > 0 ? Math.min(100, Math.round((m.spentToday / m.dailySafeLimit) * 100)) : 100;
+      const barToday = document.getElementById('bar-today-spent');
+      const diffLabel = document.getElementById('metric-today-diff');
+      const badgeSafety = document.getElementById('badge-safety-status');
+
+      barToday.style.width = `${todayPct}%`;
+
+      if (m.remainingTodayAllowance >= m.dailySafeLimit * 0.25) {
+        barToday.className = 'bg-emerald-500 h-full rounded-full transition-all duration-700';
+        diffLabel.className = 'text-xs font-semibold text-emerald-600 mt-1.5 truncate';
+        diffLabel.textContent = `Sisa jatah hari ini: ${formatRupiah(m.remainingTodayAllowance)}`;
+        badgeSafety.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 whitespace-nowrap flex-shrink-0';
+        badgeSafety.textContent = 'Aman Terkendali';
+        if (hudDot) hudDot.className = 'w-2 h-2 rounded-full bg-emerald-500';
+      } else if (m.remainingTodayAllowance >= 0) {
+        barToday.className = 'bg-amber-500 h-full rounded-full transition-all duration-700';
+        diffLabel.className = 'text-xs font-semibold text-amber-600 mt-1.5 truncate';
+        diffLabel.textContent = `Hampir limit! Sisa ${formatRupiah(m.remainingTodayAllowance)}`;
+        badgeSafety.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 whitespace-nowrap flex-shrink-0';
+        badgeSafety.textContent = 'Waspada Limit';
+        if (hudDot) hudDot.className = 'w-2 h-2 rounded-full bg-amber-500';
+      } else {
+        barToday.className = 'bg-rose-500 h-full rounded-full transition-all duration-700';
+        diffLabel.className = 'text-xs font-semibold text-rose-600 mt-1.5 truncate';
+        diffLabel.textContent = `Lewat jatah harian ${formatRupiah(Math.abs(m.remainingTodayAllowance))}`;
+        badgeSafety.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800 whitespace-nowrap flex-shrink-0';
+        badgeSafety.textContent = 'Hemat Ketat!';
+        if (hudDot) hudDot.className = 'w-2 h-2 rounded-full bg-rose-500';
+      }
+
+      // Dynamic Companion Tip
+      const mascotTip = document.getElementById('mascot-dynamic-tip');
+      const mascotMood = document.getElementById('mascot-mood-pill');
+      if (mascotTip && mascotMood) {
+        if (m.totalSpent === 0) {
+          mascotMood.textContent = '✨ Bulan Baru / Pengeluaran Rp 0';
+          mascotTip.innerHTML = `<strong>Kata Si Hemat:</strong> "Pengeluaran bulan ini sudah di-reset ke <strong>Rp&nbsp;0</strong>! Jatah harian amanmu penuh di <strong>${formatRupiah(m.dailySafeLimit)}/hari</strong>."`;
+        } else if (m.remainingTodayAllowance >= 0) {
+          mascotMood.textContent = '👑 Status Master Cuan: Kemakmuran Aman';
+          mascotTip.innerHTML = `<strong>Kata Si Hemat:</strong> "Sisa jatah harianmu hari ini masih <strong>${formatRupiah(m.remainingTodayAllowance)}</strong> dan kamu sudah menyelamatkan <strong>${formatRupiah(appState.impulseSavedTotal)}</strong> di Perisai Anti-Kalap!"`;
+        } else {
+          mascotMood.textContent = '🛡️ Status Master Cuan: Mode Berani Hemat!';
+          mascotTip.innerHTML = `<strong>Kata Si Hemat:</strong> "Hari ini kamu melewati batas harian sebesar <strong>${formatRupiah(Math.abs(m.remainingTodayAllowance))}</strong>. Klik <em>Atur Ulang Pengeluaran Bulan Ini</em> jika ingin mengkalibrasi ulang sisa saldomu!"`;
+        }
+      }
+
+      // Category Stacked Bar & Cards
+      const stackedBar = document.getElementById('category-stacked-bar');
+      const catGrid = document.getElementById('category-breakdown-grid');
+      const expenseCategories = ['Makan & Minum', 'Tagihan & Kos', 'Akademik & Produktivitas', 'Transport', 'Gaya Hidup & Hiburan'];
+
+      stackedBar.innerHTML = '';
+      catGrid.innerHTML = '';
+
+      let topCatName = 'Belum Ada';
+      let topCatVal = 0;
+
+      expenseCategories.forEach(cat => {
+        const val = m.byCategory[cat] || 0;
+        if (val > topCatVal) {
+          topCatVal = val;
+          topCatName = cat;
+        }
+        const pct = m.totalSpent > 0 ? Math.round((val / m.totalSpent) * 100) : 0;
+        const meta = CATEGORY_META[cat];
+
+        if (pct > 0) {
+          const seg = document.createElement('div');
+          seg.className = `${meta.bar} h-full first:rounded-l-full last:rounded-r-full transition-all duration-700`;
+          seg.style.width = `${Math.max(4, pct)}%`;
+          seg.title = `${cat}: ${formatRupiah(val)} (${pct}%)`;
+          stackedBar.appendChild(seg);
+        }
+
+        const card = document.createElement('div');
+        card.className = 'p-3 rounded-2xl border border-slate-100 bg-slate-50/70 flex flex-col justify-between min-w-0';
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-1 mb-1.5">
+            <span class="text-[11px] font-bold text-slate-700 truncate">${cat}</span>
+            <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded ${meta.bg} ${meta.text} flex-shrink-0">${pct}%</span>
+          </div>
+          <div class="rp-nowrap font-mono text-xs sm:text-sm font-bold text-slate-900 truncate">${formatRupiah(val)}</div>
+        `;
+        catGrid.appendChild(card);
+      });
+
+      document.getElementById('top-category-badge').textContent = `Terbesar: ${topCatName}`;
+
+      // Filterable Transaction List
+      const searchQ = (document.getElementById('filter-search')?.value || '').toLowerCase().trim();
+      const catFilter = document.getElementById('filter-category')?.value || 'ALL';
+      const listContainer = document.getElementById('tx-list-container');
+
+      const filteredTx = appState.transactions.filter(tx => {
+        const matchSearch = tx.title.toLowerCase().includes(searchQ) || tx.category.toLowerCase().includes(searchQ);
+        const matchCat = catFilter === 'ALL' || tx.category === catFilter;
+        return matchSearch && matchCat;
+      });
+
+      if (filteredTx.length === 0) {
+        listContainer.innerHTML = `
+          <div class="text-center py-10 text-slate-400 space-y-2">
+            <i class="ph ph-sparkle text-3xl text-emerald-500 block"></i>
+            <p class="text-xs font-bold text-slate-700">Belum ada transaksi pengeluaran tercatat (Rp&nbsp;0).</p>
+            <p class="text-[11px] text-slate-400">Gunakan tombol Catat Cepat 1-Detik di kiri atau klik "Pulihkan Data Demo" di menu Atur Ulang.</p>
+          </div>
+        `;
+        fitCurrencyElements();
+        return;
+      }
+
+      listContainer.innerHTML = filteredTx.map(tx => {
+        const meta = CATEGORY_META[tx.category] || CATEGORY_META['Makan & Minum'];
+        const isIncome = tx.type === 'income';
+        return `
+          <div class="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl border border-slate-200/80 hover:border-rose-200 bg-white transition-all group">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-10 h-10 rounded-xl ${meta.bg} ${meta.text} flex items-center justify-center flex-shrink-0">
+                <i class="ph-bold ${meta.icon} text-lg"></i>
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs sm:text-sm font-bold text-slate-900 truncate">${tx.title}</div>
+                <div class="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-400 mt-0.5">
+                  <span class="font-semibold text-slate-600">${tx.category}</span>
+                  <span>•</span>
+                  <span class="px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 font-medium">${tx.method}</span>
+                  <span>•</span>
+                  <span>${tx.date}</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 flex-shrink-0 ml-2">
+              <span class="rp-nowrap font-mono text-xs sm:text-sm font-bold ${isIncome ? 'text-emerald-600' : 'text-slate-900'}">
+                ${isIncome ? '+' : '-'}${formatRupiah(tx.amount)}
+              </span>
+              <button onclick="deleteTransaction('${tx.id}')" class="p-1.5 rounded-lg text-slate-300 hover:text-rose-600 hover:bg-rose-50 transition-colors" title="Hapus Transaksi">
+                <i class="ph-bold ph-trash text-sm"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      fitCurrencyElements();
+    }
+
+    // 1-Click Clear All Monthly Expenses to Rp 0
+    function clearMonthlyExpensesNow() {
+      appState.transactions = [];
+      saveState();
+      renderTracker();
+      evaluateImpulseItem();
+      closeModal('modal-rebudget');
+      showToast(
+        'Pengeluaran Bulan Ini Dinolkan (Rp 0)!',
+        'Seluruh riwayat transaksi bulan ini telah dikosongkan. Saldo kembali utuh 100%.',
+        'success'
+      );
+    }
+
+    function openRebudgetModal() {
+      document.getElementById('input-monthly-budget').value = appState.monthlyBudget;
+      document.getElementById('input-days-remaining').value = appState.daysRemaining;
+      document.getElementById('input-actual-remaining').value = '';
+      const m = document.getElementById('modal-rebudget');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function saveRebudgetSettings(e) {
+      e.preventDefault();
+      const newBudget = Math.max(50000, Number(document.getElementById('input-monthly-budget').value) || 1800000);
+      const newDays = Math.max(1, Math.min(31, Number(document.getElementById('input-days-remaining').value) || 15));
+      const actualRemainingRaw = document.getElementById('input-actual-remaining').value.trim();
+
+      appState.monthlyBudget = newBudget;
+      appState.daysRemaining = newDays;
+
+      if (actualRemainingRaw !== '') {
+        const actualVal = Math.max(0, Number(actualRemainingRaw));
+        appState.monthlyBudget = actualVal;
+        appState.transactions = [];
+        showToast(
+          'Saldo Dikuras & Dikalibrasi Ulang!',
+          `Sisa saku disesuaikan menjadi ${formatRupiah(actualVal)} untuk ${newDays} hari ke depan.`,
+          'indigo'
+        );
+      } else {
+        showToast(
+          'Anggaran Bulanan Diperbarui!',
+          `Target ${formatRupiah(newBudget)} untuk ${newDays} hari tersisa telah aktif.`,
+          'success'
+        );
+      }
+
+      saveState();
+      renderTracker();
+      evaluateImpulseItem();
+      closeModal('modal-rebudget');
+    }
+
+    function setTxType(type) {
+      appState.txTypeDraft = type;
+      const btnExp = document.getElementById('type-btn-expense');
+      const btnInc = document.getElementById('type-btn-income');
+      const catSelect = document.getElementById('tx-category');
+
+      if (type === 'income') {
+        btnInc.className = 'py-2 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white shadow-sm';
+        btnExp.className = 'py-2 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900';
+        catSelect.value = 'Pemasukan';
+      } else {
+        btnExp.className = 'py-2 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-sm';
+        btnInc.className = 'py-2 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900';
+        if (catSelect.value === 'Pemasukan') catSelect.value = 'Makan & Minum';
+      }
+    }
+
+    function addTransactionRecord({ title, amount, category, method = 'QRIS', type = 'expense' }) {
+      const now = new Date();
+      const timeStr = now.toTimeString().slice(0, 5);
+      const newTx = {
+        id: 'tx-' + Date.now() + '-' + Math.random().toString(36).slice(2, 5),
+        title,
+        amount: Number(amount),
+        category,
+        method,
+        type,
+        date: `Hari Ini, ${timeStr}`,
+        isToday: true
+      };
+      appState.transactions.unshift(newTx);
+      saveState();
+      renderTracker();
+      evaluateImpulseItem();
+    }
+
+    function quickLogExpense(title, amount, category, method, type = 'expense') {
+      addTransactionRecord({ title, amount, category, method, type });
+      showToast(
+        type === 'income' ? `Pemasukan +${formatRupiah(amount)} Tercatat!` : `Tercatat: ${title}`,
+        `${formatRupiah(amount)} via ${method} berhasil masuk SakuTracker.`,
+        type === 'income' ? 'success' : 'indigo'
+      );
+    }
+
+    function handleAddTransaction(e) {
+      e.preventDefault();
+      const title = document.getElementById('tx-title').value.trim();
+      const amount = Number(document.getElementById('tx-amount').value);
+      const method = document.getElementById('tx-method').value;
+      const category = document.getElementById('tx-category').value;
+      const type = category === 'Pemasukan' ? 'income' : appState.txTypeDraft;
+
+      if (!title || amount <= 0) return;
+
+      addTransactionRecord({ title, amount, category, method, type });
+      document.getElementById('tx-title').value = '';
+      document.getElementById('tx-amount').value = '';
+
+      showToast(
+        'Transaksi Berhasil Disimpan!',
+        `${title} (${formatRupiah(amount)}) telah diperbarui di saldo harianmu.`,
+        'success'
+      );
+    }
+
+    function deleteTransaction(txId) {
+      const target = appState.transactions.find(t => t.id === txId);
+      appState.transactions = appState.transactions.filter(t => t.id !== txId);
+      saveState();
+      renderTracker();
+      if (target) {
+        showToast('Transaksi Dihapus', `${target.title} telah dihapus dari riwayat.`, 'danger');
+      }
+    }
+
+    // =========================================================================
+    // MODULE 2: PERISAI ANTI-KALAP (IMPULSE SHIELD & 48-HOUR VAULT)
+    // =========================================================================
+    function evaluateImpulseItem() {
+      const price = Math.max(0, Number(document.getElementById('imp-price')?.value) || 0);
+      const trigger = document.getElementById('imp-trigger')?.value || 'FOMO';
+      const urgency = Number(document.getElementById('imp-urgency')?.value) || 4;
+      const m = calculateFinancialMetrics();
+
+      const safeDaily = Math.max(15000, m.dailySafeLimit);
+      const daysEq = (price / safeDaily).toFixed(1);
+      const mealsEq = Math.round(price / 12000);
+      const hoursEq = (price / 25000).toFixed(1);
+
+      const eqDaysEl = document.getElementById('eq-days-safe');
+      const eqMealsEl = document.getElementById('eq-meals');
+      const eqHoursEl = document.getElementById('eq-work-hours');
+      const urgLabel = document.getElementById('imp-urgency-label');
+      const verdictBox = document.getElementById('imp-verdict-box');
+
+      if (eqDaysEl) eqDaysEl.textContent = `${daysEq} Hari`;
+      if (eqMealsEl) eqMealsEl.textContent = `${mealsEq} Porsi`;
+      if (eqHoursEl) eqHoursEl.textContent = `${hoursEq} Jam`;
+      if (urgLabel) urgLabel.textContent = `Skor Urgensi: ${urgency}/10`;
+
+      // Calculate Impulse Risk Score (0-100)
+      let risk = Math.min(60, Math.round((price / safeDaily) * 14));
+      if (trigger === 'FOMO' || trigger === 'FLASH_SALE' || trigger === 'STRESS') risk += 28;
+      risk -= urgency * 3;
+      risk = Math.max(12, Math.min(98, risk));
+
+      if (verdictBox) {
+        if (risk >= 65) {
+          verdictBox.className = 'p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-950 leading-relaxed font-medium';
+          verdictBox.innerHTML = `🚨 <strong>Risiko Kalap Tinggi (${risk}/100):</strong> Barang ini menyedot <strong>${daysEq} hari</strong> jatah hidup amanmu (${mealsEq}x makan mahasiswa). Masukkan ke <strong>Brankas Tunda 48 Jam</strong> dulu agar tidak menyesal di akhir bulan!`;
+        } else if (risk >= 40) {
+          verdictBox.className = 'p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-950 leading-relaxed font-medium';
+          verdictBox.innerHTML = `⚠️ <strong>Risiko Sedang (${risk}/100):</strong> Setara dengan ${hoursEq} jam kerja asisten praktikum. Tunda minimal 24-48 jam untuk memastikan kamu benar-benar membutuhkannya.`;
+        } else {
+          verdictBox.className = 'p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 leading-relaxed font-medium';
+          verdictBox.innerHTML = `✅ <strong>Pembelian Rasional (${risk}/100):</strong> Urgensi tinggi untuk menunjang kuliah dan masih dalam batas aman anggaranmu.`;
+        }
+      }
+    }
+
+    function loadSampleImpulseItem() {
+      const samples = [
+        { name: 'Hoodie Oversize Branded Flash Sale 12.12', price: 225000, trigger: 'FLASH_SALE', urgency: 3 },
+        { name: 'Nongkrong Fine Coffee & Pastry Bareng Circle', price: 75000, trigger: 'FOMO', urgency: 2 },
+        { name: 'Mouse Wireless Ergonomis untuk Ngoding', price: 145000, trigger: 'PRODUCTIVE', urgency: 8 }
+      ];
+      const pick = samples[Math.floor(Math.random() * samples.length)];
+      document.getElementById('imp-name').value = pick.name;
+      document.getElementById('imp-price').value = pick.price;
+      document.getElementById('imp-trigger').value = pick.trigger;
+      document.getElementById('imp-urgency').value = pick.urgency;
+      evaluateImpulseItem();
+      showToast('Simulasi Godaan Dimuat', `Menguji "${pick.name}" terhadap Jatah Harian Amanmu.`, 'indigo');
+    }
+
+    function lockItemIntoVault() {
+      const name = document.getElementById('imp-name').value.trim() || 'Barang Impulsif';
+      const price = Math.max(1000, Number(document.getElementById('imp-price').value) || 50000);
+      const trigger = document.getElementById('imp-trigger').value;
+      const m = calculateFinancialMetrics();
+      const daysEq = (price / Math.max(15000, m.dailySafeLimit)).toFixed(1);
+
+      appState.vaultItems.unshift({
+        id: 'v-' + Date.now(),
+        name,
+        price,
+        trigger,
+        createdAt: 'Baru saja dikunci • Sisa 48 jam',
+        eqDays: `${daysEq} Hari Jatah Hidup`
+      });
+
+      saveState();
+      renderImpulseModule();
+      showToast('Dikunci di Brankas 48 Jam!', `${name} ditahan dulu selama 48 jam sebelum keputusan akhir.`, 'warning');
+    }
+
+    function cancelImpulseDirectSave() {
+      const name = document.getElementById('imp-name').value.trim() || 'Barang Impulsif';
+      const price = Math.max(1000, Number(document.getElementById('imp-price').value) || 50000);
+
+      appState.impulseSavedTotal += price;
+      saveState();
+      renderImpulseModule();
+      renderTracker();
+      showToast('Hebat! Cuan Terselamatkan!', `Kamu berhasil menahan diri dari ${name} dan menghemat ${formatRupiah(price)}!`, 'success');
+    }
+
+    function resolveVaultItem(vaultId, action) {
+      const item = appState.vaultItems.find(v => v.id === vaultId);
+      if (!item) return;
+
+      appState.vaultItems = appState.vaultItems.filter(v => v.id !== vaultId);
+
+      if (action === 'save') {
+        appState.impulseSavedTotal += item.price;
+        showToast('Batal Beli! Cuan Selamat!', `${formatRupiah(item.price)} dari "${item.name}" berhasil diselamatkan!`, 'success');
+      } else {
+        addTransactionRecord({
+          title: `Beli dari Brankas: ${item.name}`,
+          amount: item.price,
+          category: 'Gaya Hidup & Hiburan',
+          method: 'QRIS',
+          type: 'expense'
+        });
+        showToast('Dicatat ke Pengeluaran', `${item.name} (${formatRupiah(item.price)}) telah masuk SakuTracker.`, 'indigo');
+      }
+
+      saveState();
+      renderImpulseModule();
+      renderTracker();
+    }
+
+    function renderImpulseModule() {
+      const savedEl = document.getElementById('impulse-total-saved');
+      if (savedEl) savedEl.textContent = formatRupiah(appState.impulseSavedTotal);
+
+      const badge = document.getElementById('nav-vault-badge');
+      if (badge) badge.textContent = appState.vaultItems.length;
+
+      const container = document.getElementById('vault-items-container');
+      if (!container) return;
+
+      if (appState.vaultItems.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10 text-slate-400">
+            <i class="ph ph-shield-check text-3xl text-emerald-500 mb-2 block"></i>
+            <p class="text-xs font-bold text-slate-700">Brankas Tunda Bersih!</p>
+            <p class="text-[11px] text-slate-400">Tidak ada godaan belanja yang sedang mengantre.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = appState.vaultItems.map(item => `
+        <div class="p-4 rounded-2xl border border-amber-200/90 bg-gradient-to-r from-amber-50/40 via-white to-white flex flex-col justify-between gap-3">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-100 text-amber-900">${item.createdAt}</span>
+              <h3 class="font-extrabold text-sm text-slate-900 mt-1.5">${item.name}</h3>
+              <p class="text-xs text-rose-800 font-semibold mt-0.5">Setara ${item.eqDays}</p>
+            </div>
+            <div class="rp-nowrap font-mono font-extrabold text-base text-slate-900">${formatRupiah(item.price)}</div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+            <button onclick="resolveVaultItem('${item.id}', 'save')" class="btn-spring py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold flex items-center justify-center gap-1.5">
+              <i class="ph-bold ph-x-circle"></i>
+              <span>Coret & Hemat Cuan!</span>
+            </button>
+            <button onclick="resolveVaultItem('${item.id}', 'buy')" class="btn-spring py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center gap-1.5">
+              <i class="ph-bold ph-shopping-cart"></i>
+              <span>Tetap Beli</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // =========================================================================
+    // MODULE 3: RADAR LANGGANAN & TAGIHAN KOS (SUBSCRIPTION LEAK DETECTOR)
+    // =========================================================================
+    function renderSubscriptionsModule() {
+      const monthlyTotal = appState.subscriptions.reduce((sum, s) => sum + s.cost, 0);
+      const yearlyTotal = monthlyTotal * 12;
+      const unsharedItems = appState.subscriptions.filter(s => s.canShare && !s.isShared);
+      const potentialMonthlySave = unsharedItems.reduce((sum, s) => sum + Math.round(s.cost * 0.5), 0);
+
+      animateCurrency(document.getElementById('sub-monthly-total'), monthlyTotal);
+      document.getElementById('sub-yearly-total').textContent = formatRupiah(yearlyTotal);
+      animateCurrency(document.getElementById('sub-potential-save'), potentialMonthlySave);
+
+      const leakLabel = document.getElementById('sub-leak-count');
+      if (leakLabel) {
+        leakLabel.textContent = unsharedItems.length > 0
+          ? `${unsharedItems.length} Layanan Bisa Dipatungan`
+          : 'Semua Layanan Sudah Optimal! 🎉';
+      }
+
+      const grid = document.getElementById('subs-grid-container');
+      if (!grid) return;
+
+      grid.innerHTML = appState.subscriptions.map(sub => {
+        const canOptimize = sub.canShare && !sub.isShared;
+        const savedIfShared = Math.round(sub.cost * 0.5);
+        return `
+          <div class="smooth-card rounded-3xl p-5 flex flex-col justify-between gap-4 ${canOptimize ? 'border-amber-300 bg-amber-50/15' : ''}">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">${sub.category}</span>
+                <span class="font-mono text-[11px] font-bold text-rose-800 bg-rose-50 px-2 py-0.5 rounded-lg">
+                  Tgl ${sub.dueDay} / bln
+                </span>
+              </div>
+              <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">${sub.name}</h3>
+              <div class="flex items-baseline gap-2">
+                <span class="rp-nowrap font-mono text-lg font-extrabold text-slate-900">${formatRupiah(sub.cost)}</span>
+                <span class="text-xs text-slate-400">/ bulan</span>
+              </div>
+
+              ${canOptimize ? `
+                <div class="p-2.5 rounded-xl bg-amber-100/70 border border-amber-300/80 text-[11px] text-amber-950 font-semibold">
+                  💡 <strong>Deteksi Bocor Halus:</strong> Ubah ke paket Family/Patungan Kos untuk hemat <strong>${formatRupiah(savedIfShared)}/bln</strong>!
+                </div>
+              ` : sub.isShared ? `
+                <div class="p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-[11px] text-emerald-800 font-bold flex items-center gap-1.5">
+                  <i class="ph-fill ph-users-three"></i> Sudah Mode Patungan Hemat
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-100">
+              ${canOptimize ? `
+                <button onclick="optimizeSubToShared('${sub.id}')" class="btn-spring flex-1 py-2 px-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-extrabold flex items-center justify-center gap-1">
+                  <i class="ph-bold ph-sparkle"></i> Ubah ke Patungan (-50%)
+                </button>
+              ` : ''}
+              <button onclick="paySubscriptionNow('${sub.id}')" class="btn-spring flex-1 py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center justify-center gap-1">
+                <i class="ph-bold ph-check"></i> Catat Bayar
+              </button>
+              <button onclick="deleteSubscription('${sub.id}')" class="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50" title="Hentikan Langganan">
+                <i class="ph-bold ph-trash text-sm"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      fitCurrencyElements();
+    }
+
+    function optimizeSubToShared(subId) {
+      const sub = appState.subscriptions.find(s => s.id === subId);
+      if (!sub || sub.isShared) return;
+
+      const saved = Math.round(sub.cost * 0.5);
+      sub.cost = sub.cost - saved;
+      sub.isShared = true;
+      sub.name = sub.name.replace('(Masih Paket Individual)', '(Paket Patungan)').replace('Solo', 'Patungan');
+      appState.impulseSavedTotal += saved;
+
+      saveState();
+      renderSubscriptionsModule();
+      renderTracker();
+      showToast('Berhasil Diubah ke Patungan!', `Tagihan ${sub.name} terpangkas ${formatRupiah(saved)}/bulan!`, 'success');
+    }
+
+    function paySubscriptionNow(subId) {
+      const sub = appState.subscriptions.find(s => s.id === subId);
+      if (!sub) return;
+
+      addTransactionRecord({
+        title: `Bayar Rutin: ${sub.name}`,
+        amount: sub.cost,
+        category: 'Tagihan & Kos',
+        method: 'Transfer',
+        type: 'expense'
+      });
+
+      showToast('Tagihan Dicatat ke SakuTracker!', `${sub.name} (${formatRupiah(sub.cost)}) berhasil dicatat.`, 'indigo');
+    }
+
+    function deleteSubscription(subId) {
+      const sub = appState.subscriptions.find(s => s.id === subId);
+      appState.subscriptions = appState.subscriptions.filter(s => s.id !== subId);
+      saveState();
+      renderSubscriptionsModule();
+      if (sub) {
+        showToast('Langganan Dihentikan!', `Menghentikan ${sub.name} menghemat ${formatRupiah(sub.cost * 12)}/tahun!`, 'success');
+      }
+    }
+
+    function openAddSubModal() {
+      const m = document.getElementById('modal-add-sub');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function handleAddSubscription(e) {
+      e.preventDefault();
+      const name = document.getElementById('new-sub-name').value.trim();
+      const cost = Number(document.getElementById('new-sub-cost').value);
+      const dueDay = Number(document.getElementById('new-sub-day').value);
+      const category = document.getElementById('new-sub-cat').value;
+      const canShare = document.getElementById('new-sub-shareable').value === 'yes';
+
+      appState.subscriptions.unshift({
+        id: 's-' + Date.now(),
+        name,
+        cost,
+        dueDay,
+        category,
+        isShared: false,
+        canShare
+      });
+
+      saveState();
+      renderSubscriptionsModule();
+      closeModal('modal-add-sub');
+      e.target.reset();
+      showToast('Tagihan Rutin Ditambahkan!', `${name} kini dipantau di Radar Tagihan.`, 'indigo');
+    }
+
+    // =========================================================================
+    // MODULE 4: TIME-WALLET & HABIT OPTIMIZER
+    // =========================================================================
+    function renderTimeWalletModule() {
+      let monthlySaved = 0;
+      let hoursGained = 0;
+
+      appState.habits.forEach(h => {
+        if (h.optimized) {
+          monthlySaved += h.monthlySave;
+          hoursGained += h.timeGainHours;
+        }
+      });
+
+      const savedEl = document.getElementById('habit-monthly-saved');
+      const timeEl = document.getElementById('habit-time-saved');
+      if (savedEl) savedEl.innerHTML = `${formatRupiah(monthlySaved)}<span class="text-xs font-normal text-slate-300">/bln</span>`;
+      if (timeEl) timeEl.textContent = `+${hoursGained} Jam Fokus Produktif / bulan`;
+
+      const habitList = document.getElementById('habit-swapper-list');
+      if (habitList) {
+        habitList.innerHTML = appState.habits.map(h => `
+          <div class="p-4 rounded-2xl border transition-all ${
+            h.optimized ? 'border-emerald-300 bg-emerald-50/30' : 'border-slate-200 bg-white'
+          }">
+            <div class="flex items-start justify-between gap-3">
+              <div class="space-y-1.5 flex-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="font-extrabold text-sm text-slate-900">${h.title}</span>
+                  <span class="rp-nowrap font-mono text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                    h.optimized ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600'
+                  }">
+                    Hemat ${formatRupiah(h.monthlySave)}/bln • +${h.timeGainHours} jam
+                  </span>
+                </div>
+                <div class="text-xs ${h.optimized ? 'line-through text-slate-400' : 'text-rose-700 font-medium'}">
+                  ❌ Kebiasaan Boros: ${h.badLabel}
+                </div>
+                <div class="text-xs ${h.optimized ? 'text-emerald-800 font-bold' : 'text-slate-500'}">
+                  ✅ Kebiasaan Optimal: ${h.goodLabel}
+                </div>
+              </div>
+              <button onclick="toggleHabitOptimization('${h.id}')" class="btn-spring px-3.5 py-2 rounded-xl text-xs font-extrabold flex-shrink-0 ${
+                h.optimized
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+              }">
+                ${h.optimized ? 'Aktif ✓' : 'Aktifkan'}
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      const routineContainer = document.getElementById('routine-blocks-container');
+      if (routineContainer) {
+        routineContainer.innerHTML = appState.routineBlocks.map(b => `
+          <div class="p-3.5 rounded-2xl border border-slate-200/80 bg-white flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-xl bg-slate-100 text-slate-800 whitespace-nowrap">${b.time}</span>
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-slate-900 truncate">${b.activity}</div>
+                <div class="text-[11px] text-emerald-700 font-semibold">${b.type}</div>
+              </div>
+            </div>
+            <button onclick="deleteRoutineBlock('${b.id}')" class="p-1.5 rounded-lg text-slate-300 hover:text-rose-600">
+              <i class="ph-bold ph-trash text-sm"></i>
+            </button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function toggleHabitOptimization(habitId) {
+      const h = appState.habits.find(item => item.id === habitId);
+      if (!h) return;
+      h.optimized = !h.optimized;
+      saveState();
+      renderTimeWalletModule();
+      showToast(
+        h.optimized ? 'Kebiasaan Optimal Diaktifkan!' : 'Kebiasaan Dinonaktifkan',
+        h.optimized ? `Potensi hemat +${formatRupiah(h.monthlySave)}/bulan & +${h.timeGainHours} jam produktif!` : h.title,
+        h.optimized ? 'success' : 'warning'
+      );
+    }
+
+    function handleAddRoutineBlock(e) {
+      e.preventDefault();
+      const time = document.getElementById('routine-time').value.trim();
+      const activity = document.getElementById('routine-activity').value.trim();
+      const type = document.getElementById('routine-type').value;
+
+      appState.routineBlocks.push({
+        id: 'r-' + Date.now(),
+        time,
+        activity,
+        type
+      });
+
+      saveState();
+      renderTimeWalletModule();
+      e.target.reset();
+      showToast('Blok Waktu Ditambahkan!', `${time} — ${activity} berhasil dijadwalkan.`, 'success');
+    }
+
+    function deleteRoutineBlock(id) {
+      appState.routineBlocks = appState.routineBlocks.filter(r => r.id !== id);
+      saveState();
+      renderTimeWalletModule();
+    }
+
+    // =========================================================================
+    // MODALS & EXPORT UTILITIES
+    // =========================================================================
+    function openAboutModal() {
+      const m = document.getElementById('modal-about');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function openSkorCuanModal() {
+      const m = calculateFinancialMetrics();
+      const budgetRatio = m.effectiveBudget > 0 ? m.remaining / m.effectiveBudget : 0.5;
+      const dailyBonus = m.remainingTodayAllowance >= 0 ? 12 : -8;
+      const score = Math.max(45, Math.min(99, Math.round(budgetRatio * 85 + dailyBonus)));
+
+      const valEl = document.getElementById('skor-cuan-value');
+      const titleEl = document.getElementById('skor-cuan-title');
+      const descEl = document.getElementById('skor-cuan-desc');
+
+      if (valEl) valEl.textContent = score;
+      if (titleEl && descEl) {
+        if (score >= 80) {
+          titleEl.textContent = 'Gelar: Master Cuan Bulaksumur! 👑';
+          descEl.textContent = `Luar biasa! Sisa anggaranmu (${formatRupiah(m.remaining)}) sangat sehat dengan jatah harian aman ${formatRupiah(m.dailySafeLimit)}/hari.`;
+        } else if (score >= 65) {
+          titleEl.textContent = 'Gelar: Ksatria Saku Terkendali 🛡️';
+          descEl.textContent = `Manajemen keuanganmu cukup seimbang. Gunakan Perisai Anti-Kalap & Radar Tagihan untuk mendongkrak skor cuanmu!`;
+        } else {
+          titleEl.textContent = 'Gelar: Pejuang Akhir Bulan Tangguh 🔥';
+          descEl.textContent = `Klik tombol "Atur Ulang Pengeluaran Bulan Ini" untuk mengkalibrasi ulang sisa saldomu agar tetap aman sampai akhir bulan.`;
+        }
+      }
+
+      const modal = document.getElementById('modal-skor-cuan');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeModal(id) {
+      const m = document.getElementById(id);
+      if (m) {
+        m.classList.add('hidden');
+        m.classList.remove('flex');
+      }
+    }
+
+    function confirmResetDemoData() {
+      localStorage.removeItem(STORAGE_KEY);
+      appState = getDefaultState();
+      saveState();
+      initRenderAll();
+      closeModal('modal-rebudget');
+      showToast('Data Simulasi Demo Dipulihkan!', 'Seluruh transaksi dan modul kembali ke data contoh awal.', 'indigo');
+    }
+
+    function exportReportCSV() {
+      const rows = [
+        ['ID', 'Tanggal', 'Judul Transaksi', 'Kategori', 'Metode Pembayaran', 'Tipe', 'Nominal (IDR)']
+      ];
+      appState.transactions.forEach(t => {
+        rows.push([
+          t.id,
+          `"${t.date}"`,
+          `"${t.title.replace(/"/g, '""')}"`,
+          `"${t.category}"`,
+          t.method,
+          t.type,
+          t.amount
+        ]);
+      });
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(r => r.join(',')).join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'Laporan_Keuangan_Sadjahda_COMMIT2026.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showToast('Laporan CSV Diunduh!', 'Rekap keuangan Sadjahda berhasil diekspor.', 'success');
+    }
+
+    function initRenderAll() {
+      renderTracker();
+      evaluateImpulseItem();
+      renderImpulseModule();
+      renderSubscriptionsModule();
+      renderTimeWalletModule();
+      fitCurrencyElements();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initRenderAll();
+    });
+
+    window.addEventListener('resize', () => {
+      fitCurrencyElements();
+    });
+  </script>
+</body>
+</html>
