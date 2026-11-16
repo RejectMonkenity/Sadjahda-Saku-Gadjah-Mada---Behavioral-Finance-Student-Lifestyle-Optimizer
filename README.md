@@ -59,7 +59,7 @@ Alih-alih menggunakan contoh kasus umum, **Sadjahda** mengangkat permasalahan ny
 
 ## 6. Tautan Website yang Sudah Di-deploy
 
-* **URL:**  
+* **URL:** https://rejectmonkenity.github.io/Sadjahda-Saku-Gadjah-Mada---Behavioral-Finance-Student-Lifestyle-Optimizer/
 
 ## 7. Keterangan Penggunaan AI, Template, Starter Code, dan Aset Pihak Ketiga
 Sesuai dengan **Ketentuan Khusus Poin 11 pada Guidebook Web Design COMMIT 2026**:
