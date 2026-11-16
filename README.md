@@ -20,10 +20,9 @@
 
 ## 3. Latar Belakang Masalah & Inovasi Baru (Di Luar Contoh Referensi Guidebook)
 
-Alih-alih menggunakan contoh kasus umum, **Sadjahda** mengangkat permasalahan nyata psikologi keuangan (*behavioral finance*) dan gaya hidup mahasiswa rantau/baru di era pembayaran digital:
-1. **Fenomena *Cashless Painlessness* & Belanja Impulsif (FOMO / Flash Sale):** Kemudahan QRIS dan *paylater/checkout* membuat mahasiswa tidak merasakan "rasa sakit" saat mengeluarkan uang untuk hal impulsif.
-2. **Kebocoran Halus (*Silent Subscription Leaks*):** Banyak mahasiswa kehilangan ratusan ribu rupiah per semester akibat langganan digital individual dan tagihan utilitas kos yang tidak dioptimalkan secara patungan.
-3. **Keterkaitan Manajemen Waktu Jeda Kuliah dengan Kebocoran Dompet:** Kebiasaan mengisi waktu kosong antar-kelas di kafe berbiaya tinggi atau begadang yang memicu pesan-antar makanan tengah malam menguras anggaran bulanan.
+Di masa kini, banyak mahasiswa semakin menghadap berbagai kebutuhan dan tuntutan gaya hidup, mulai dari kebutuhan akademik, transportasi, makanan, dan hiburan personal. Kemudahan transaksi digital membuat pengeluaran menjadi lebih mudah dilakukan, namun banyak uang dikeluarkan tanpa kebijakan finansial yang baik. Permasalahan ini sering terjadi karena kurangnya prioritas pengeluaran serta membedakan kebutuhan, keinginan Dan faktor impulsivitas yang sering diakibatkan oleh fenomena FOMO . Akibatnya, banyak mahasiswa mengalami kesulitan mengelola uang bulanan dan kesulitan menyeimbangkan kebutuhan sehari-hari dengan keinginan personal.
+Oleh karena itu, kita membuat website yang ditujukan untuk mahasiswa dan generasi muda yang ingin mengatur prioritas pengeluaran agar dapat memiliki kebijakan finansial yang lebih sehat. Permasalahan ini perlu diatasi agar pengguna website dapat mengoptimalisasikan pengeluaran uang tanpa harus menghapus kebutuhan pribadi atau hiburan.
+
 
 ### 4 Modul Utama Sadjahda:
 
