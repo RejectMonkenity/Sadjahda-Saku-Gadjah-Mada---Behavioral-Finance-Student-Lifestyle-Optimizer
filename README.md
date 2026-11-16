@@ -18,7 +18,7 @@
   2. `Muhammad Alfarras Dyen Firjatullah` — UI/UX
   3. `Aliif Bagas Athari` — Back-End
 
-## 3. Latar Belakang Masalah & Inovasi Baru (Di Luar Contoh Referensi Guidebook)
+## 3. Latar Belakang Masalah & Inovasi Baru
 
 Di masa kini, banyak mahasiswa semakin menghadap berbagai kebutuhan dan tuntutan gaya hidup, mulai dari kebutuhan akademik, transportasi, makanan, dan hiburan personal. Kemudahan transaksi digital membuat pengeluaran menjadi lebih mudah dilakukan, namun banyak uang dikeluarkan tanpa kebijakan finansial yang baik. Permasalahan ini sering terjadi karena kurangnya prioritas pengeluaran serta membedakan kebutuhan, keinginan Dan faktor impulsivitas yang sering diakibatkan oleh fenomena FOMO . Akibatnya, banyak mahasiswa mengalami kesulitan mengelola uang bulanan dan kesulitan menyeimbangkan kebutuhan sehari-hari dengan keinginan personal.
 Oleh karena itu, kita membuat website yang ditujukan untuk mahasiswa dan generasi muda yang ingin mengatur prioritas pengeluaran agar dapat memiliki kebijakan finansial yang lebih sehat. Permasalahan ini perlu diatasi agar pengguna website dapat mengoptimalisasikan pengeluaran uang tanpa harus menghapus kebutuhan pribadi atau hiburan.
@@ -38,7 +38,7 @@ Oleh karena itu, kita membuat website yang ditujukan untuk mahasiswa dan generas
 4. **Time-Wallet & Habit Optimizer (*Audit Kebiasaan & Perencana Blok Waktu*)**
    * Simulator interaktif yang menghitung penghematan bulanan dan tambahan jam fokus produktif ketika mahasiswa mengubah kebiasaan harian (seperti manajemen jeda kuliah 3 jam, jam tidur, dan membawa tumbler).
 
-### Filosofi Identitas Visual & Maskot: "Si Hemat / Master Cuan"
+### Filosofi Identitas Visual & Maskot: "Master Cuan"
 * **Emas Kemakmuran (`#F59E0B`):** Koin emas `"Rp"` dan kalung adat melambangkan literasi finansial & tabungan masa depan.
 * **Merah Marun Keberanian (`#991B1B`):** Busana adat dan dompet *"Saku"* melambangkan keberanian menahan belanja impulsif.
 * **Abu-Abu Gelap Akademik (`#1E293B`):** Toga wisuda menjaga asosiasi kuat dengan identitas intelektual mahasiswa UGM.
