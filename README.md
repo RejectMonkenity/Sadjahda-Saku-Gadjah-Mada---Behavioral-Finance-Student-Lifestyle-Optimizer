@@ -16,7 +16,7 @@
 * **Anggota Tim:**
   1. `Muhamad Bayanaka Zehan Afiat` — Front-End 
   2. `Muhammad Alfarras Dyen Firjatullah` — UI/UX
-  3. `Aliif Bagas Athari` — Back-End
+  3. `Aliif Bagas Athari` — Feauture
 
 ## 3. Latar Belakang Masalah & Inovasi Baru
 
